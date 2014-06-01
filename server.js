@@ -112,6 +112,12 @@ router.route('/lockups/:lockup_id')
 // all of our routes will be prefixed with /api
 app.use('/api', router);
 
+// for(i = 0; i<10; i++) {
+//   Lockup.create({
+//     name: i,
+//   })
+// })
+
 // START THE SERVER
 // =============================================================================
 app.listen(port);
