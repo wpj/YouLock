@@ -2,7 +2,6 @@ var should = require('should'),
     assert = require('assert'),
     request = require('supertest'),
     expect = require('expect.js'),
-    _ = require('lodash'),
     mongoose = require('mongoose')
     Lockup = require('../app/models/lockup');
 
