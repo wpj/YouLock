@@ -10,6 +10,8 @@ var bodyParser = require('body-parser');
 var Lockup = require('./app/models/lockup');
 
 var mongoose = require('mongoose');
+if (process.env.NODE_ENV === 'development') mongoose.connect('mongodb://localhost:lockup-api');
+if (process.env.NODE_ENV === 'test') mongoose.connect('mongodb://localhost:lockup-api-test');
 mongoose.connect('mongodb://localhost:lockup-api');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -26,13 +28,6 @@ var port = process.env.PORT || 8080;    // set our port
 // ROUTES FOR OUR API
 // =============================================================================
 var router = express.Router();        // get an instance of the express Router
-
-// middleware to use for all requests
-router.use(function(req, res, next) {
-  // do logging
-  console.log('Something is happening.');
-  next(); // make sure we go to the next routes and don't stop here
-});
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
@@ -80,7 +75,7 @@ router.route('/lockups/:lockup_id')
   // (accessed at PUT http://localhost:8080/api/lockups/:lockup_id)
   .put(function(req, res) {
     Lockup.findById(req.params.lockup_id, function(err, lockup) {
-      if (err) res.send(err);
+      if (err) return res.send(err);
       lockup.update({
         name: req.body.name,
         address: req.body.address,
@@ -88,8 +83,10 @@ router.route('/lockups/:lockup_id')
         rackAmount: req.body.rackAmount,
         createdBy: req.body.createdBy
       }, function(err) {
-        if (err) res.send(err);
+        if (err) return res.send(err);
+        // } else {
         res.json({ message: "Lockup updated!" });
+        // };
       });
     });
   })

@@ -7,7 +7,7 @@ var LockupSchema = new Schema({
   coordinates: String,
   rackAmount: Number,
   createdBy: String
-  // addedOn: Date
+  // addedOn: { type: Date, default: Date.now }
 });
 
 module.exports = mongoose.model('Lockup', LockupSchema);
