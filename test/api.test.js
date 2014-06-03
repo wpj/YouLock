@@ -42,6 +42,29 @@ describe('Lockup REST API', function(){
         });
     });
 
+    before(function(done) {
+
+      request(url)
+        .post('/lockups')
+        .send({name: 'Invalid Data'})
+        .end(function(err, res) {
+          if (err) throw err;
+          expect(res.body.message).to.be('Validation failed');
+          done();
+        });
+    });
+
+    it('should not create a Lockup when sending an invalid POST request', function(done) {
+
+      request(url)
+        .get('/lockups')
+        .end(function(err, res) {
+          if (err) throw err;
+          expect(res.body).to.be.empty;
+          done();
+        });
+    });
+
     it('should display all Lockups when sending GET requests', function(done) {
 
       Lockup.create({
@@ -118,6 +141,18 @@ describe('Lockup REST API', function(){
         .end(function(err, res) {
           if (err) throw err;
           expect(res.body.message).to.eql('Lockup updated!');
+          done();
+        });
+    });
+
+    it('should not update the resource if invalid information is submitted', function(done) {
+
+      request(url)
+        .put('/lockups/' + id)
+        .send({ name: 'Invalid data' })
+        .end(function(err, res) {
+          if (err) throw err;
+          expect(res.body.message).to.be('Cast to string failed for value "undefined" at path "address"');
           done();
         });
     });

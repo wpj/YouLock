@@ -2,11 +2,11 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var LockupSchema = new Schema({
-  name: String,
-  address: String,
-  coordinates: String,
-  rackAmount: Number,
-  createdBy: String
+  name: { type: String, required: true },
+  address: { type: String, required: true},
+  coordinates: { type: String, required: true },
+  rackAmount: { type: Number, required: true },
+  createdBy: { type: String, required: true }
   // addedOn: { type: Date, default: Date.now }
 });
 
