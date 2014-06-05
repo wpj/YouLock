@@ -43,8 +43,7 @@ router.route('/lockups')
     Lockup.create({
       name: req.body.name,
       address: req.body.address,
-      latitude: req.body.latitude,
-      longitude: req.body.longitude,
+      coordinates: req.body.coordinates,
       rackAmount: req.body.rackAmount,
       createdBy: req.body.createdBy
     }, function(err, lockup) {
@@ -80,8 +79,7 @@ router.route('/lockups/:lockup_id')
       lockup.update({
         name: req.body.name,
         address: req.body.address,
-        latitude: req.body.latitude,
-        longitude: req.body.longitude,
+        coordinates: req.body.coordinates,
         rackAmount: req.body.rackAmount,
         createdBy: req.body.createdBy
       }, function(err) {
@@ -110,12 +108,6 @@ router.route('/lockups/:lockup_id')
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
 app.use('/api', router);
-
-// for(i = 0; i<10; i++) {
-//   Lockup.create({
-//     name: i,
-//   })
-// })
 
 // START THE SERVER
 // =============================================================================

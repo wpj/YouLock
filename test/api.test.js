@@ -24,8 +24,10 @@ describe('Lockup REST API', function(){
       var lockup = {
         name: '20 Exchange Pl',
         address: '20 Exchange Pl, NYC',
-        latitude: -74.000776,
-        longitude: 40.71532,
+        coordinates: {
+          latitude: -74.000776,
+          longitude: 40.71532
+        },
         rackAmount: "2",
         createdBy: 'NYCDOT'
         // addedOn: Date.now
@@ -71,8 +73,10 @@ describe('Lockup REST API', function(){
       Lockup.create({
         name: '20 Exchange Pl',
         address: '20 Exchange Pl, NYC',
-        latitude: -74.000776,
-        longitude: 40.71532,
+        coordinates: {
+          latitude: -74.000776,
+          longitude: 40.71532
+        },
         rackAmount: "2",
         createdBy: 'NYCDOT',
         addedOn: Date.now
@@ -103,8 +107,10 @@ describe('Lockup REST API', function(){
       Lockup.create({
         name: '20 Exchange Pl',
         address: '20 Exchange Pl, NYC',
-        latitude: -74.000776,
-        longitude: 40.71532,
+        coordinates: {
+          latitude: -74.000776,
+          longitude: 40.71532
+        },
         rackAmount: "2",
         createdBy: 'NYCDOT'
       }, function(err, lockup) {
@@ -132,8 +138,10 @@ describe('Lockup REST API', function(){
       var updatedLockup = {
         name: '50 1st Ave',
         address: '50 1st Ave, NYC',
-        latitude: -74.000776,
-        longitude: 40.71532,
+        coordinates: {
+          latitude: -74.000776,
+          longitude: 40.71532
+        },
         rackAmount: "2",
         createdBy: 'USER'
       }
