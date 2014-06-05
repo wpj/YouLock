@@ -43,7 +43,8 @@ router.route('/lockups')
     Lockup.create({
       name: req.body.name,
       address: req.body.address,
-      coordinates: req.body.coordinates,
+      latitude: req.body.latitude,
+      longitude: req.body.longitude,
       rackAmount: req.body.rackAmount,
       createdBy: req.body.createdBy
     }, function(err, lockup) {
@@ -79,7 +80,8 @@ router.route('/lockups/:lockup_id')
       lockup.update({
         name: req.body.name,
         address: req.body.address,
-        coordinates: req.body.coordinates,
+        latitude: req.body.latitude,
+        longitude: req.body.longitude,
         rackAmount: req.body.rackAmount,
         createdBy: req.body.createdBy
       }, function(err) {
