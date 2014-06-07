@@ -7,8 +7,8 @@ var LockupSchema = new Schema({
   // latitude: { type: Number, required: true },
   // longitude: { type: Number, required: true },
   coordinates: {
-    latitude: { type: Number, required: true },
-    longitude: { type: Number, required: true }
+    latitude: { type: Number, required: true, index: true },
+    longitude: { type: Number, required: true, index: true }
   },
   rackAmount: { type: Number, required: true },
   createdBy: { type: String, required: true }
