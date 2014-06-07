@@ -31,6 +31,7 @@ var port = process.env.PORT || 8080;    // set our port
 var router = express.Router();        // get an instance of the express Router
 
 router.use(cors());
+// router.use(winston)
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
@@ -57,10 +58,15 @@ router.route('/lockups')
 
   // get all the lockups (accessed at GET http://localhost:8080/api/lockups)
   .get(function(req, res) {
-    Lockup.find(function(err, lockups) {
-      if (err) res.send(err);
-      res.json(lockups);
-    });
+    if (req.query.map_bounds) {
+      console.log(req.query);
+    } else {
+      console.log(req.query);
+      Lockup.find(function(err, lockups) {
+        if (err) res.send(err);
+        res.json(lockups);
+      });
+    };
   });
 
 router.route('/lockups/:lockup_id')
