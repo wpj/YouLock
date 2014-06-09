@@ -31,7 +31,6 @@ var port = process.env.PORT || 8080;    // set our port
 var router = express.Router();        // get an instance of the express Router
 
 router.use(cors());
-// router.use(winston)
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
@@ -50,18 +49,37 @@ router.route('/lockups')
       coordinates: req.body.coordinates,
       rackAmount: req.body.rackAmount,
       createdBy: req.body.createdBy
-    }, function(err, lockup) {
+    },
+    function(err, lockup) {
       if (err) res.send(err);
       res.json(lockup);
     });
   })
 
-  // get all the lockups (accessed at GET http://localhost:8080/api/lockups)
+  // if there's a map_bounds query string, send Lockup documents within the map area
+  // otherwise, get all the lockups (accessed at GET http://localhost:8080/api/lockups)
   .get(function(req, res) {
-    if (req.query.map_bounds) {
-      console.log(req.query);
+    if (req.query.filtered) {
+
+      // have to parseInt because the params return a stringified num for some reason
+      // cornersArray has to be in this format to work with mongo's $within $box function
+      var cornersArray = [
+        [
+          parseFloat(req.query.SWLng),
+          parseFloat(req.query.SWLat)
+        ],
+        [
+          parseFloat(req.query.NELng),
+          parseFloat(req.query.NELat)
+        ]
+      ];
+
+      Lockup.findInMapArea(cornersArray, function(err, lockups) {
+        if (err) console.log(err);
+        console.log(lockups);
+        res.json(lockups);
+      });
     } else {
-      console.log(req.query);
       Lockup.find(function(err, lockups) {
         if (err) res.send(err);
         res.json(lockups);
@@ -111,8 +129,6 @@ router.route('/lockups/:lockup_id')
     });
   });
 
-
-// more routes for our API will happen here
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
