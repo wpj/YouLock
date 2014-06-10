@@ -46,7 +46,10 @@ router.route('/lockups')
     Lockup.create({
       name: req.body.name,
       address: req.body.address,
-      coordinates: req.body.coordinates,
+      location: {
+        type: req.body.location.type,
+        coordinates: req.body.location.coordinates
+      },
       rackAmount: req.body.rackAmount,
       createdBy: req.body.createdBy
     },
