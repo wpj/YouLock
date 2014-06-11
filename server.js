@@ -55,6 +55,7 @@ router.route('/lockups')
     },
     function(err, lockup) {
       if (err) res.send(err);
+      console.log(lockup);
       res.json(lockup);
     });
   })
