@@ -15,8 +15,8 @@ describe('Lockup REST API', function(){
 
     afterEach(function(done) {
       for (var i in mongoose.connection.collections) {
-        mongoose.connection.collections[i].remove(function(){});
-      };
+        mongoose.connection.collections[i].remove(function(){})
+      }
      done();
     });
 
@@ -24,13 +24,12 @@ describe('Lockup REST API', function(){
       var lockup = {
         name: '20 Exchange Pl',
         address: '20 Exchange Pl, NYC',
-        coordinates: {
-          latitude: -74.000776,
-          longitude: 40.71532
+        location: {
+          type: "Point",
+          coordinates: [-74.000776, 40.71532]
         },
         rackAmount: "2",
         createdBy: 'NYCDOT'
-        // addedOn: Date.now
       };
 
       request(url)
@@ -52,6 +51,7 @@ describe('Lockup REST API', function(){
         .send({name: 'Invalid Data'})
         .end(function(err, res) {
           if (err) throw err;
+          // console.log(res.body);
           expect(res.body.message).to.be('Validation failed');
           done();
         });
@@ -73,13 +73,12 @@ describe('Lockup REST API', function(){
       Lockup.create({
         name: '20 Exchange Pl',
         address: '20 Exchange Pl, NYC',
-        coordinates: {
-          latitude: -74.000776,
-          longitude: 40.71532
+        location: {
+          type: "Point",
+          coordinates: [-74.000776, 40.71532]
         },
         rackAmount: "2",
-        createdBy: 'NYCDOT',
-        addedOn: Date.now
+        createdBy: 'NYCDOT'
       }, function(err, lockup) {
         if (err) throw err;
         // console.log(lockup);
@@ -107,9 +106,9 @@ describe('Lockup REST API', function(){
       Lockup.create({
         name: '20 Exchange Pl',
         address: '20 Exchange Pl, NYC',
-        coordinates: {
-          latitude: -74.000776,
-          longitude: 40.71532
+        location: {
+          type: "Point",
+          coordinates: [-74.000776, 40.71532]
         },
         rackAmount: "2",
         createdBy: 'NYCDOT'
@@ -138,13 +137,13 @@ describe('Lockup REST API', function(){
       var updatedLockup = {
         name: '50 1st Ave',
         address: '50 1st Ave, NYC',
-        coordinates: {
-          latitude: -74.000776,
-          longitude: 40.71532
+        location: {
+          type: "Point",
+          coordinates: [-74.000776, 40.71532]
         },
         rackAmount: "2",
         createdBy: 'USER'
-      }
+      };
 
       request(url)
         .put('/lockups/' + id)

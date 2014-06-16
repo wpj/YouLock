@@ -22,6 +22,6 @@ var LockupSchema = new Schema({
 
 LockupSchema.statics.findInMapArea = function(mapCorners, callback) {
   this.where('location.coordinates').within({ box: mapCorners }).exec(callback);
-}
+};
 
 module.exports = mongoose.model('Lockup', LockupSchema);

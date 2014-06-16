@@ -34,7 +34,7 @@ router.use(cors());
 
 // test route to make sure everything is working (accessed at GET http://localhost:8080/api)
 router.get('/', function(req, res) {
-  res.json({ message: 'Please visit /api/lockups to use the API' }); 
+  res.json({ message: 'Please visit /api/lockups to use the API' });
 });
 
 // on routes that end in /lockups
@@ -46,10 +46,7 @@ router.route('/lockups')
     Lockup.create({
       name: req.body.name,
       address: req.body.address,
-      location: {
-        type: req.body.location.type,
-        coordinates: req.body.location.coordinates
-      },
+      location: req.body.location,
       rackAmount: req.body.rackAmount,
       createdBy: req.body.createdBy
     },
@@ -88,7 +85,7 @@ router.route('/lockups')
         if (err) res.send(err);
         res.json(lockups);
       });
-    };
+    }
   });
 
 router.route('/lockups/:lockup_id')
@@ -107,29 +104,38 @@ router.route('/lockups/:lockup_id')
   .put(function(req, res) {
     Lockup.findById(req.params.lockup_id, function(err, lockup) {
       if (err) return res.send(err);
-      lockup.update({
-        name: req.body.name,
-        address: req.body.address,
-        coordinates: req.body.coordinates,
-        rackAmount: req.body.rackAmount,
-        createdBy: req.body.createdBy
-      }, function(err) {
-        if (err) return res.send(err);
-        // } else {
-        res.json({ message: "Lockup updated!" });
-        // };
-      });
+      if (lockup) {
+        lockup.update({
+          name: req.body.name,
+          address: req.body.address,
+          location: req.body.location,
+          rackAmount: req.body.rackAmount,
+          createdBy: req.body.createdBy
+        }, function(err) {
+          if (err) return res.send(err);
+          res.json({ message: "Lockup updated!" });
+        });
+      } else {
+        res.json({ message: "Lockup not found." });
+      }
     });
   })
 
   // delete the lockup with this id
   // (accessed at DELETE http://localhost:8080/api/lockups/:lockup_id)
   .delete(function(req, res) {
-    Lockup.remove({
-      _id: req.params.lockup_id
-    }, function(err, lockup) {
-      if (err) res.send(err);
-      res.json({ message: 'Lockup successfully deleted' });
+    Lockup.findById(req.params.lockup_id, function(err, lockup) {
+      if (lockup) {
+        Lockup.remove({
+          // _id: req.params.lockup_id
+          _id: lockup._id
+        }, function(err, lockup) {
+          if (err) res.send(err);
+          res.json({ message: 'Lockup successfully deleted' });
+        });
+      } else {
+        res.json({ message: "Lockup not found" });
+      }
     });
   });
 
