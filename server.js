@@ -9,6 +9,7 @@ var app        = express();         // define our app using express
 var bodyParser = require('body-parser');
 var cors       = require('cors');
 var Lockup = require('./app/models/lockup');
+var Report = require('./app/models/report');
 
 var mongoose = require('mongoose');
 if (process.env.NODE_ENV === 'development') mongoose.connect('mongodb://localhost:lockup-api');
@@ -139,6 +140,26 @@ router.route('/lockups/:lockup_id')
     });
   });
 
+// routes for report functionality
+router.route('/reports')
+
+  .post(function(req, res) {
+    Report.create({
+      lockupId: req.body.lockupId,
+      reportDescription: req.body.reportDescription
+    }, function(err, report) {
+      if (err) res.send(err);
+      if (report) console.log(report);
+      res.json(report);
+    });
+  })
+
+  .get(function(req, res) {
+    Report.find(function(err, reports) {
+      if (err) res.send(err);
+      res.json(reports);
+    });
+  });
 
 // REGISTER OUR ROUTES -------------------------------
 // all of our routes will be prefixed with /api
