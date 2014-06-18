@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var LockupSchema = new Schema({
-  name: { type: String, required: true },
+  description: { type: String, required: true },
   address: { type: String, required: true },
   location: {
     type: { type: String, required: true },

@@ -45,7 +45,7 @@ router.route('/lockups')
   // create a lockup (accessed at POST http://localhost:8080/api/lockups)
   .post(function(req, res) {
     Lockup.create({
-      name: req.body.name,
+      description: req.body.description,
       address: req.body.address,
       location: req.body.location,
       rackAmount: req.body.rackAmount,
@@ -107,7 +107,7 @@ router.route('/lockups/:lockup_id')
       if (err) return res.send(err);
       if (lockup) {
         lockup.update({
-          name: req.body.name,
+          description: req.body.description,
           address: req.body.address,
           location: req.body.location,
           rackAmount: req.body.rackAmount,

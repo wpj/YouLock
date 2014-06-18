@@ -22,7 +22,7 @@ describe('Lockup REST API', function(){
 
     it('should create a Lockup when sending a POST request', function(done) {
       var lockup = {
-        name: '20 Exchange Pl',
+        description: '20 Exchange Pl',
         address: '20 Exchange Pl, NYC',
         location: {
           type: "Point",
@@ -39,7 +39,7 @@ describe('Lockup REST API', function(){
         .end(function(err, res) {
           if (err) throw err;
           // debugger;
-          (res.body.name).should.eql('20 Exchange Pl');
+          (res.body.description).should.eql('20 Exchange Pl');
           done();
         });
     });
@@ -48,7 +48,7 @@ describe('Lockup REST API', function(){
 
       request(url)
         .post('/lockups')
-        .send({name: 'Invalid Data'})
+        .send({description: 'Invalid Data'})
         .end(function(err, res) {
           if (err) throw err;
           // console.log(res.body);
@@ -71,7 +71,7 @@ describe('Lockup REST API', function(){
     it('should display all Lockups when sending GET requests', function(done) {
 
       Lockup.create({
-        name: '20 Exchange Pl',
+        description: '20 Exchange Pl',
         address: '20 Exchange Pl, NYC',
         location: {
           type: "Point",
@@ -91,7 +91,7 @@ describe('Lockup REST API', function(){
           if (err) throw err;
           // console.log(res.body);
           // expect(res.body.length).to.eql(1);
-          expect(res.body[0].name).to.eql('20 Exchange Pl');
+          expect(res.body[0].description).to.eql('20 Exchange Pl');
           done();
         });
     });
@@ -104,7 +104,7 @@ describe('Lockup REST API', function(){
     before(function(done) {
 
       Lockup.create({
-        name: '20 Exchange Pl',
+        description: '20 Exchange Pl',
         address: '20 Exchange Pl, NYC',
         location: {
           type: "Point",
@@ -126,7 +126,7 @@ describe('Lockup REST API', function(){
         .get('/lockups/' + id)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
-          expect(res.body.name).to.eql('20 Exchange Pl');
+          expect(res.body.description).to.eql('20 Exchange Pl');
           // console.log(res.body);
           done();
         });
@@ -135,7 +135,7 @@ describe('Lockup REST API', function(){
     it('should update the information of the resource corresponding to the id in the params', function(done) {
 
       var updatedLockup = {
-        name: '50 1st Ave',
+        description: '50 1st Ave',
         address: '50 1st Ave, NYC',
         location: {
           type: "Point",
@@ -160,7 +160,7 @@ describe('Lockup REST API', function(){
 
       request(url)
         .put('/lockups/' + id)
-        .send({ name: 'Invalid data' })
+        .send({ description: 'Invalid data' })
         .end(function(err, res) {
           if (err) throw err;
           expect(res.body.message).to.be('Cast to string failed for value "undefined" at path "address"');
@@ -175,8 +175,8 @@ describe('Lockup REST API', function(){
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           if (err) throw err;
-          expect(res.body.name).not.to.eql('20 Exchange Pl');
-          expect(res.body.name).to.eql('50 1st Ave');
+          expect(res.body.description).not.to.eql('20 Exchange Pl');
+          expect(res.body.description).to.eql('50 1st Ave');
           done();
         });
     });
