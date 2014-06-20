@@ -146,7 +146,9 @@ router.route('/reports')
   .post(function(req, res) {
     Report.create({
       lockupId: req.body.lockupId,
-      reportDescription: req.body.reportDescription
+      reportDescription: req.body.description,
+      theft: req.body.theft,
+      missing: req.body.missing
     }, function(err, report) {
       if (err) res.send(err);
       if (report) console.log(report);
