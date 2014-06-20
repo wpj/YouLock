@@ -14,7 +14,7 @@ var LockupSchema = new Schema({
     ]
   },
   rackAmount: { type: Number, required: true },
-  createdBy: { type: String, required: true }
+  createdBy: { type: Number, required: true }
   // addedOn: { type: Date, default: Date.now }
 });
 

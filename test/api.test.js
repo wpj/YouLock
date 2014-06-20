@@ -29,7 +29,7 @@ describe('Lockup REST API', function(){
           coordinates: [-74.000776, 40.71532]
         },
         rackAmount: "2",
-        createdBy: 'NYCDOT'
+        createdBy: 1
       };
 
       request(url)
@@ -78,7 +78,7 @@ describe('Lockup REST API', function(){
           coordinates: [-74.000776, 40.71532]
         },
         rackAmount: "2",
-        createdBy: 'NYCDOT'
+        createdBy: 1
       }, function(err, lockup) {
         if (err) throw err;
         // console.log(lockup);
@@ -111,7 +111,7 @@ describe('Lockup REST API', function(){
           coordinates: [-74.000776, 40.71532]
         },
         rackAmount: "2",
-        createdBy: 'NYCDOT'
+        createdBy: 1
       }, function(err, lockup) {
 
         if (err) throw err;
