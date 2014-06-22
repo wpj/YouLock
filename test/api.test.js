@@ -142,7 +142,7 @@ describe('Lockup REST API', function(){
           coordinates: [-74.000776, 40.71532]
         },
         rackAmount: "2",
-        createdBy: 'USER'
+        createdBy: 1
       };
 
       request(url)
