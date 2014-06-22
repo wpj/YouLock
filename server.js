@@ -7,33 +7,34 @@
 var express    = require('express');    // call express
 var app        = express();         // define our app using express
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var db = mongoose.connection;
 var cors       = require('cors');
+var port = process.env.PORT || 8080;    // set our port
 var Lockup = require('./app/models/lockup');
 var Report = require('./app/models/report');
+var configDB = require('./config/database.js');
 
-var mongoose = require('mongoose');
-if (process.env.NODE_ENV === 'development') mongoose.connect('mongodb://localhost:lockup-api');
-if (process.env.NODE_ENV === 'test') mongoose.connect('mongodb://localhost:lockup-api-test');
-mongoose.connect('mongodb://localhost:lockup-api');
-var db = mongoose.connection;
+var router = express.Router();        // get an instance of the express Router
+
+// mongoose config
+mongoose.connect(configDB.url);
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function callback () {
   console.log('DB connection established');
 });
 
-// configure app to use bodyParser()
-// this will let us get the data from a POST
+// app config
 app.use(bodyParser());
 
-var port = process.env.PORT || 8080;    // set our port
-
-// ROUTES FOR OUR API
-// =============================================================================
-var router = express.Router();        // get an instance of the express Router
-
+// router config
 router.use(cors());
 
-// test route to make sure everything is working (accessed at GET http://localhost:8080/api)
+
+// API ROUTES
+// =============================================================================
+
+// accessed at GET http://localhost:8080/api
 router.get('/', function(req, res) {
   res.json({ message: 'Please visit /api/lockups to use the API' });
 });
