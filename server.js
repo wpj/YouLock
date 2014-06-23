@@ -1,24 +1,25 @@
-// server.js
-
 // BASE SETUP
-// =============================================================================
 
-// call the packages we need
-var express    = require('express');    // call express
-var app        = express();         // define our app using express
-var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var morgan = require('morgan');
-var db = mongoose.connection;
-var cors       = require('cors');
-var port = process.env.PORT || 8080;    // set our port
-var env = process.env.NODE_ENV || 'development';
-var configDB = require('./config/database.js');
+var express      = require('express');
+var app          = express();
+var mongoose     = require('mongoose');
+var passport     = require('passport');
 
-var router = express.Router();        // get an instance of the express Router
+var bodyParser   = require('body-parser');
+var cookieParser = require('cookie-parser');
+var session      = require('express-session');
+var cors         = require('cors');
+var morgan       = require('morgan');
+
+var configDb     = require('./config/database.js');
+var db           = mongoose.connection;
+var port         = process.env.PORT || 8080;
+var env          = process.env.NODE_ENV || 'development';
+
+var router       = express.Router();
 
 // mongoose config
-mongoose.connect(configDB.url);
+mongoose.connect(configDb.url);
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
   console.log('DB connection established');
@@ -37,11 +38,10 @@ router.use(cors());
 // routes
 require('./app/routes.js')(router);
 
-// REGISTER OUR ROUTES -------------------------------
-// all of our routes will be prefixed with /api
+
+// mount router at ~/api
 app.use('/api', router);
 
-// START THE SERVER
-// =============================================================================
+// start server
 app.listen(port);
 console.log('Magic happens on port ' + port);
