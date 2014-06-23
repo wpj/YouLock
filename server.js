@@ -12,6 +12,7 @@ var morgan = require('morgan');
 var db = mongoose.connection;
 var cors       = require('cors');
 var port = process.env.PORT || 8080;    // set our port
+var env = process.env.NODE_ENV || 'development';
 var configDB = require('./config/database.js');
 
 var router = express.Router();        // get an instance of the express Router
@@ -27,7 +28,9 @@ db.once('open', function() {
 app.use(bodyParser());
 
 // router config
-router.use(morgan('tiny'));
+if (env === 'development') {
+  router.use(morgan('tiny'));
+}
 router.use(cors());
 
 
