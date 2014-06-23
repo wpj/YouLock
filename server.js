@@ -8,6 +8,7 @@ var express    = require('express');    // call express
 var app        = express();         // define our app using express
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+var morgan = require('morgan');
 var db = mongoose.connection;
 var cors       = require('cors');
 var port = process.env.PORT || 8080;    // set our port
@@ -26,6 +27,7 @@ db.once('open', function() {
 app.use(bodyParser());
 
 // router config
+router.use(morgan('tiny'));
 router.use(cors());
 
 
