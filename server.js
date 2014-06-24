@@ -9,7 +9,6 @@ var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 var cors         = require('cors');
 var morgan       = require('morgan');
-var flash        = require('connect-flash');
 
 var configDb     = require('./config/database.js');
 var db           = mongoose.connection;
@@ -40,8 +39,6 @@ if (env === 'development') {
 // app config
 app.use(cookieParser());
 app.use(bodyParser());
-app.use(flash());
-app.set('view engine', 'ejs');
 
 // router config
 router.use(cors());
