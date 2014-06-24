@@ -135,3 +135,17 @@ module.exports = function(router) {
       });
     });
 };
+
+// route middleware to make sure a user is logged in
+var isLoggedIn = function(req, res, next) {
+
+  // if user is authenticated in the session, carry on
+  if (req.isAuthenticated()) {
+    console.log("Request authenticated.");
+    return next();
+  }
+
+  // if they aren't, redirect them to the home page
+  // res.redirect('/');
+  res.json(401, { message: "Please sign in." });
+};

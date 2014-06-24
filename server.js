@@ -1,5 +1,4 @@
-// BASE SETUP
-
+// base setup
 var express      = require('express');
 var app          = express();
 var mongoose     = require('mongoose');
@@ -18,7 +17,8 @@ var port         = process.env.PORT || 8080;
 var env          = process.env.NODE_ENV || 'development';
 
 var router       = express.Router();
-var userRouter   = express.Router();
+var authRouter   = express.Router();
+
 
 // mongoose config
 mongoose.connect(configDb.url);
@@ -27,8 +27,10 @@ db.once('open', function() {
   console.log('DB connection established');
 });
 
+
 // passport config
 require('./config/passport')(passport);
+
 
 // dev config
 if (env === 'development') {
@@ -44,20 +46,22 @@ app.set('view engine', 'ejs');
 // router config
 router.use(cors());
 
-// userRouter config
-userRouter.use(session({ secret: "racksRacksRacksRacks" }));
-userRouter.use(passport.initialize());
-userRouter.use(passport.session());
+// authRouter config
+authRouter.use(cors());
+authRouter.use(session({ secret: "racksRacksRacksRacks" }));
+authRouter.use(passport.initialize());
+authRouter.use(passport.session());
 
 
 // routes
 require('./app/routes.js')(router);
-require('./app/user-routes.js')(userRouter, passport);
+require('./app/auth-routes.js')(authRouter, passport);
 
 
-// mount router at ~/api
+// mount routers
 app.use('/api', router);
-app.use(userRouter);
+app.use('/auth', authRouter);
+
 
 // start server
 app.listen(port);
