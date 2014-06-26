@@ -3,7 +3,7 @@ module.exports = function(router, passport) {
   router.post('/signup', function(req, res, next) {
     passport.authenticate('local-signup', function(err, user, info) {
       if (err) return next(err);
-      if (!user) return res.json(403, {
+      if (!user) return res.json(401, {
         signedUp: false,
         info: info
       });
@@ -38,7 +38,11 @@ module.exports = function(router, passport) {
 
   router.get('/logout', function(req, res) {
     req.logout();
-    res.json({ 'signoutMessage': 'Successfully signed out' });
+    res.json(200, { 'signoutMessage': 'Successfully signed out' });
+  });
+
+  router.get('/loggedin', function(req, res) {
+    res.send(req.isAuthenticated() ? req.user.local.email : '0');
   });
 
 };

@@ -145,7 +145,6 @@ var isLoggedIn = function(req, res, next) {
     return next();
   }
 
-  // if they aren't, redirect them to the home page
-  // res.redirect('/');
-  res.json(401, { message: "Please sign in." });
+  res.send(401);
+  // res.json(401, { message: "Please sign in." });
 };
