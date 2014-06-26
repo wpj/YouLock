@@ -28,6 +28,10 @@ module.exports = function(router, passport) {
       req.login(user, function(err) {
         if (err) return next(err);
         return res.json({
+          user: {
+            id: user._id,
+            email: user.local.email
+          },
           signedIn: true,
           info: info
         });
@@ -42,7 +46,7 @@ module.exports = function(router, passport) {
   });
 
   router.get('/loggedin', function(req, res) {
-    res.send(req.isAuthenticated() ? req.user.local.email : '0');
+    res.send(req.isAuthenticated() ? { id: req.user._id, email: req.user.local.email } : '0');
   });
 
 };
