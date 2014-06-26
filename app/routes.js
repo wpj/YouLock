@@ -21,7 +21,8 @@ module.exports = function(router) {
         address: req.body.address,
         location: req.body.location,
         rackAmount: req.body.rackAmount,
-        createdBy: req.body.createdBy
+        createdBy: req.body.createdBy,
+        lockupType: req.body.lockupType
       },
       function(err, lockup) {
         if (err) res.send(err);
@@ -83,7 +84,8 @@ module.exports = function(router) {
             address: req.body.address,
             location: req.body.location,
             rackAmount: req.body.rackAmount,
-            createdBy: req.body.createdBy
+            createdBy: req.body.createdBy,
+            lockupType: req.body.lockupType
           }, function(err) {
             if (err) return res.send(err);
             res.json({ message: "Lockup updated!" });

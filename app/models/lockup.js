@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+var Schema   = mongoose.Schema;
+var ObjectId = Schema.ObjectId;
 
 var LockupSchema = new Schema({
   description: { type: String, required: true },
@@ -14,7 +15,8 @@ var LockupSchema = new Schema({
     ]
   },
   rackAmount: { type: Number, required: true },
-  createdBy: { type: Number, required: true }
+  createdBy: { type: ObjectId, required: true },
+  lockupType: { type: Number, required: true }
   // addedOn: { type: Date, default: Date.now }
 });
 
