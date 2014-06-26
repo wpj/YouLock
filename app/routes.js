@@ -136,6 +136,28 @@ module.exports = function(router) {
         res.json(reports);
       });
     });
+
+  // analytics
+  router.get('/analytics/lockups/:lockup_id', function(req, res) {
+    Lockup.findById(req.params.lockup_id, function(err, lockup) {
+      if (err) res.send(err);
+
+      lockup.pageViews++;
+      lockup.save(function(err) {
+        if (err) console.log(err);
+        res.send("Incremented pageview counter to " + lockup.pageViews + " for :" + lockup._id);
+      });
+    });
+  });
+
+  router.get('/analytics/search/location', function(req, res) {
+
+  });
+
+  router.get('/analytics/search/address', function(req, res) {
+
+  });
+
 };
 
 // route middleware to make sure a user is logged in

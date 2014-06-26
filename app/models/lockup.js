@@ -16,7 +16,8 @@ var LockupSchema = new Schema({
   },
   rackAmount: { type: Number, required: true },
   createdBy: { type: ObjectId, required: true },
-  lockupType: { type: Number, required: true }
+  lockupType: { type: Number, required: true },
+  pageViews: { type: Number, default: 0 }
   // addedOn: { type: Date, default: Date.now }
 });
 
