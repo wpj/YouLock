@@ -165,8 +165,17 @@ module.exports = function(router) {
   });
 
   router.post('/analytics/search/location', function(req, res) {
-    console.log(req.body);
-    res.send(req.body);
+    Record.create({
+      dataType: 2,
+      time: new Date(),
+      location: {
+        type: "Point",
+        coordinates: req.body.coordinates
+      }
+    }, function(err, record) {
+      if (err) res.send(err);
+      res.json(record);
+    });
   });
 
   router.get('/analytics/search/address', function(req, res) {
