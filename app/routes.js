@@ -1,5 +1,6 @@
 var Lockup = require('./models/lockup');
 var Report = require('./models/report');
+var Record = require('./models/record');
 
 module.exports = function(router) {
   // API ROUTES
@@ -145,7 +146,20 @@ module.exports = function(router) {
       lockup.pageViews++;
       lockup.save(function(err) {
         if (err) console.log(err);
-        res.send("Incremented pageview counter to " + lockup.pageViews + " for :" + lockup._id);
+        // res.send("Incremented pageview counter to " + lockup.pageViews + " for :" + lockup._id);
+      });
+      console.log(lockup.location);
+
+      Record.create({
+        dataType: 1,
+        time: new Date(),
+        location: {
+          type: "Point",
+          coordinates: lockup.location.coordinates
+        }
+      }, function(err, record) {
+        if (err) res.send(err);
+        res.json(record);
       });
     });
   });
