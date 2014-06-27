@@ -164,13 +164,16 @@ module.exports = function(router) {
     });
   });
 
-  router.post('/analytics/search/location', function(req, res) {
+  router.get('/analytics/search/location', function(req, res) {
     Record.create({
       dataType: 2,
       time: new Date(),
       location: {
         type: "Point",
-        coordinates: req.body.coordinates
+        coordinates: [
+          parseFloat(req.query.lng),
+          parseFloat(req.query.lat)
+        ]
       }
     }, function(err, record) {
       if (err) res.send(err);
@@ -178,13 +181,16 @@ module.exports = function(router) {
     });
   });
 
-  router.post('/analytics/search/address', function(req, res) {
+  router.get('/analytics/search/address', function(req, res) {
     Record.create({
       dataType: 3,
       time: new Date(),
       location: {
         type: "Point",
-        coordinates: req.body.coordinates
+        coordinates: [
+          parseFloat(req.query.lng),
+          parseFloat(req.query.lat)
+        ]
       }
     }, function(err, record) {
       if (err) res.send(err);
