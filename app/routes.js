@@ -178,8 +178,18 @@ module.exports = function(router) {
     });
   });
 
-  router.get('/analytics/search/address', function(req, res) {
-
+  router.post('/analytics/search/address', function(req, res) {
+    Record.create({
+      dataType: 3,
+      time: new Date(),
+      location: {
+        type: "Point",
+        coordinates: req.body.coordinates
+      }
+    }, function(err, record) {
+      if (err) res.send(err);
+      res.json(record);
+    });
   });
 
 };
