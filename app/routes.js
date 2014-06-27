@@ -150,8 +150,9 @@ module.exports = function(router) {
     });
   });
 
-  router.get('/analytics/search/location', function(req, res) {
-
+  router.post('/analytics/search/location', function(req, res) {
+    console.log(req.body);
+    res.send(req.body);
   });
 
   router.get('/analytics/search/address', function(req, res) {
