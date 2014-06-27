@@ -17,6 +17,7 @@ var env          = process.env.NODE_ENV || 'development';
 
 var router       = express.Router();
 var authRouter   = express.Router();
+var dataRouter   = express.Router();
 
 
 // mongoose config
@@ -37,6 +38,8 @@ if (env === 'development') {
 }
 
 // app config
+app.set('view engine', 'ejs');
+app.use(express.static(__dirname + '/public'));
 app.use(cookieParser());
 app.use(bodyParser());
 
@@ -53,11 +56,13 @@ authRouter.use(passport.session());
 // routes
 require('./app/routes.js')(router);
 require('./app/auth-routes.js')(authRouter, passport);
+require('./app/data-routes.js')(dataRouter);
 
 
 // mount routers
 app.use('/api', router);
 app.use('/auth', authRouter);
+app.use('/data', dataRouter);
 
 
 // start server

@@ -198,6 +198,13 @@ module.exports = function(router) {
     });
   });
 
+  router.get('/analytics', function(req, res) {
+    Record.find(function(err, records) {
+      if (err) res.send(err);
+      res.json(records);
+    });
+  });
+
 };
 
 // route middleware to make sure a user is logged in

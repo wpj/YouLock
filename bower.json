@@ -1,0 +1,19 @@
+{
+  "name": "lockups",
+  "version": "0.1.0",
+  "authors": [
+    "wy"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.18",
+    "angular-google-maps": "~1.1.4"
+  }
+}

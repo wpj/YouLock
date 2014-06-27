@@ -1,0 +1,1 @@
+angular.module('dataPortal', ['google-maps', 'controllers', 'directives', 'services']);
