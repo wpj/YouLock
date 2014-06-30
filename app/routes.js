@@ -214,15 +214,26 @@ module.exports = function(router) {
         ]
       ];
 
-      Record.findInMapArea(cornersArray, function(err, records) {
-        if (err) console.log(err);
-        console.log(records);
-        res.json(records);
-      });
+      // if search query is filtered by Record's dataType
+      if (req.query.searchMode) {
+        // finds Records within the current map area that match the current searchMode (1, 2, or 3)
+        Record.findDataTypeInMapArea(cornersArray, req.query.searchMode, function(err, records) {
+          if (err) console.log(err);
+          console.log(records);
+          return res.json(records);
+        });
+      } else {
+        // finds Records within the current map area
+        Record.findAllInMapArea(cornersArray, function(err, records) {
+          if (err) console.log(err);
+          console.log(records);
+          return res.json(records);
+        });
+      }
     } else {
       Record.find(function(err, records) {
         if (err) res.send(err);
-        res.json(records);
+        return res.json(records);
       });
     }
   });

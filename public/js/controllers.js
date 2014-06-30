@@ -3,6 +3,8 @@ angular.module('controllers', [])
 .controller('PortalCtrl', ['$scope', 'Record', function($scope, Record) {
   // google.maps.visualRefresh = true;
 
+  $scope.searchMode = 1;
+
   $scope.map = {
     center: {
       latitude: 40.678528,
@@ -47,7 +49,7 @@ angular.module('controllers', [])
     var NELng = northEast.lng();
     var NELat = northEast.lat();
 
-    Record.findInMapArea(SWLng, SWLat, NELng, NELat)
+    Record.findDataTypeInMapArea(SWLng, SWLat, NELng, NELat, $scope.searchMode)
       .success(function(data) {
 
         $scope.records = data;
@@ -57,6 +59,22 @@ angular.module('controllers', [])
       .error(function(err, status) {
         console.log(err, status);
       });
+  };
+
+  $scope.refreshMap = function() {
+    searchInMapBounds($scope.map.control.getGMap());
+  };
+
+  $scope.setPageviewMode = function() {
+    $scope.searchMode = 1;
+  };
+
+  $scope.setGPSMode = function() {
+    $scope.searchMode = 2;
+  };
+
+  $scope.setAddressMode = function() {
+    $scope.searchMode = 3;
   };
 
 }]);

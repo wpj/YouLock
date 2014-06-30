@@ -1,0 +1,59 @@
+header {
+  height: 3.5em;
+  width: 100%;
+
+  #search {
+    @include span-columns(3 of 12, block-collapse);
+    background-color: #007CB9;
+    color: white;
+    height: 100%;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  nav {
+    h3 {
+      font-size: 0.8em;
+      color: white;
+      // @include linear-gradient(#DE2537, white);
+      background-color: #DE2537;
+      text-align: center;
+      height: 20%;
+    }
+  }
+
+  .header-unit {
+    @include span-columns(3 of 12, block-collapse);
+    text-align: center;
+    height: 2.5em;
+    position: relative;
+
+    button {
+      background-color: inherit;
+      border-radius: 0;
+      height: 100%;
+      width: 100%;
+    }
+
+    span {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      font-weight: bold;
+    }
+  }
+}
+
+#pageviews {
+  color: $light-gray;
+  @include linear-gradient(#181719, #FFFFFF);
+  // background-color: #181719;
+}
+
+#gps {
+  background-color: #FFEA50;
+}
+
+#address {
+  background-color: #2AA54F;
+}

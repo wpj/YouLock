@@ -16,7 +16,11 @@ var RecordSchema = new Schema({
   }
 });
 
-RecordSchema.statics.findInMapArea = function(mapCorners, callback) {
+RecordSchema.statics.findDataTypeInMapArea = function(mapCorners, searchMode, callback) {
+  this.find({ dataType: searchMode }).where('location.coordinates').within({ box: mapCorners }).exec(callback);
+};
+
+RecordSchema.statics.findAllInMapArea = function(mapCorners, searchMode, callback) {
   this.where('location.coordinates').within({ box: mapCorners }).exec(callback);
 };
 

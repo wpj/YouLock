@@ -9,7 +9,20 @@ angular.module('services', [])
         errCb(err);
       });
     },
-    findInMapArea: function(SWLng, SWLat, NELng, NELat) {
+    findDataTypeInMapArea: function(SWLng, SWLat, NELng, NELat, searchMode) {
+      return $http.get('http://localhost:8080/api/data', {
+        params: {
+          searchMode: searchMode,
+          filtered: true,
+          SWLng: SWLng,
+          SWLat: SWLat,
+          NELng: NELng,
+          NELat: NELat
+        }
+      });
+    },
+    findAllInMapArea: function(SWLng, SWLat, NELng, NELat) {
+      console.log("searching on the server!");
       return $http.get('http://localhost:8080/api/data', {
         params: {
           filtered: true,

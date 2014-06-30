@@ -572,10 +572,65 @@ body {
   margin: 0;
   padding: 0; }
 
-.angular-google-map-container, .angular-google-map {
-  height: 100%;
+.angular-google-map {
+  height: 90%;
   width: 100%; }
-  .angular-google-map-container img, .angular-google-map img {
-    max-width: none; }
+  .angular-google-map .angular-google-map-container {
+    height: 100%;
+    width: 100%; }
+    .angular-google-map .angular-google-map-container img {
+      max-width: none; }
+
+header {
+  height: 3.5em;
+  width: 100%; }
+  header #search {
+    float: left;
+    display: block;
+    width: 25.58941%;
+    background-color: #007CB9;
+    color: white;
+    height: 100%;
+    text-align: center;
+    font-weight: bold; }
+    header #search:last-child {
+      width: 23.23176%; }
+  header nav h3 {
+    font-size: 0.8em;
+    color: white;
+    background-color: #DE2537;
+    text-align: center;
+    height: 20%; }
+  header .header-unit {
+    float: left;
+    display: block;
+    width: 25.58941%;
+    text-align: center;
+    height: 2.5em;
+    position: relative; }
+    header .header-unit:last-child {
+      width: 23.23176%; }
+    header .header-unit button {
+      background-color: inherit;
+      border-radius: 0;
+      height: 100%;
+      width: 100%; }
+    header .header-unit span {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      font-weight: bold; }
+
+#pageviews {
+  color: #dddddd;
+  background-color: #181719;
+  background-image: -webkit-linear-gradient(#181719, white);
+  background-image: linear-gradient(#181719, white); }
+
+#gps {
+  background-color: #FFEA50; }
+
+#address {
+  background-color: #2AA54F; }
 
 /*# sourceMappingURL=application.css.map */

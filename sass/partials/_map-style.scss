@@ -8,10 +8,15 @@ body {
   padding: 0;
 }
 
-.angular-google-map-container, .angular-google-map {
-  height: 100%;
+.angular-google-map {
+  height: 90%;
   width: 100%;
-  img {
-    max-width: none;
+
+  .angular-google-map-container {
+    height: 100%;
+    width: 100%;
+    img {
+      max-width: none;
+    }
   }
 }

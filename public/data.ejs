@@ -23,6 +23,23 @@
   </head>
   <body ng-app="dataPortal" ng-controller="PortalCtrl">
     
+    <header>
+      <div id="search" ng-click="refreshMap()">Search</div>
+
+      <nav>
+        <h3>Data types</h3>
+        <div class="header-unit" id="pageviews">
+          <button ng-click="setPageviewMode()"><span>Page views</span></button>
+        </div>
+        <div class="header-unit" id="gps">
+          <button ng-click="setGPSMode()"><span>GPS</span></button>
+        </div>
+        <div class="header-unit" id="address">
+          <button ng-click="setAddressMode()"><span>Address</span></button>
+        </div>
+      </nav>
+    </header>
+
     <google-map
       center="map.center"
       zoom="map.zoom"
@@ -31,7 +48,6 @@
       events="map.events"
       control="map.control"
     >
-      <!-- <markers models="records" idKey="map.idKey" coords="'location'"></markers> -->
 
       <layer
         namespace="visualization"
