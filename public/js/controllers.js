@@ -17,7 +17,6 @@ angular.module('controllers', [])
     idKey: '_id',
     showBicycling: false,
     showHeat: true,
-    showWeather: true,
     heatLayerCallback: function(layer) {
       Record.getAll(function(records) {
         moddedRecords = _.map(records, function(record) {
