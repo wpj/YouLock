@@ -8,10 +8,18 @@ angular.module('controllers', [])
     },
     // control: {},
     zoom: 16,
-    // options: {
-    //   disableDefaultUI: false
-    // },
-    idKey: '_id'
+    options: {
+      // minZoom: 14
+      // disableDefaultUI: false
+    },
+    idKey: '_id',
+    showBicycling: true,
+    showHeat: true,
+    showWeather: true,
+    heatLayerCallback: function(layer) {
+      var mockHeatLayer = new MockHeatLayer(layer);
+      console.log("Heat layer created.");
+    }
     // events: {
     //   idle: function(map, event, eventArgs) {
     //     searchInMapBounds(map);
