@@ -198,11 +198,33 @@ module.exports = function(router) {
     });
   });
 
-  router.get('/analytics', function(req, res) {
-    Record.find(function(err, records) {
-      if (err) res.send(err);
-      res.json(records);
-    });
+  router.get('/data', function(req, res) {
+    if (req.query.filtered) {
+
+      // have to parseInt because the params return a stringified num for some reason
+      // cornersArray has to be in this format to work with mongo's $within $box function
+      var cornersArray = [
+        [
+          parseFloat(req.query.SWLng),
+          parseFloat(req.query.SWLat)
+        ],
+        [
+          parseFloat(req.query.NELng),
+          parseFloat(req.query.NELat)
+        ]
+      ];
+
+      Record.findInMapArea(cornersArray, function(err, records) {
+        if (err) console.log(err);
+        console.log(records);
+        res.json(records);
+      });
+    } else {
+      Record.find(function(err, records) {
+        if (err) res.send(err);
+        res.json(records);
+      });
+    }
   });
 
 };

@@ -1,4 +1,4 @@
-/*! angular-google-maps 1.1.4 2014-06-19
+/*! angular-google-maps 1.1.6 2014-06-28
  *  AngularJS directives for Google Maps
  *  git: https://github.com/nlaplante/angular-google-maps.git
  */
@@ -1043,8 +1043,11 @@ Nicholas McCready - https://twitter.com/nmccready
           this.$log.info(this);
         }
 
-        MarkerManager.prototype.add = function(gMarker, optDraw) {
-          this.handleOptDraw(gMarker, optDraw, true);
+        MarkerManager.prototype.add = function(gMarker, optDraw, redraw) {
+          if (redraw == null) {
+            redraw = true;
+          }
+          this.handleOptDraw(gMarker, optDraw, redraw);
           return this.gMarkers.push(gMarker);
         };
 
@@ -1095,13 +1098,15 @@ Nicholas McCready - https://twitter.com/nmccready
           this.gMarkers.forEach(function(gMarker) {
             if (!gMarker.isDrawn) {
               if (gMarker.doAdd) {
-                return gMarker.setMap(_this.gMap);
+                gMarker.setMap(_this.gMap);
+                return gMarker.isDrawn = true;
               } else {
                 return deletes.push(gMarker);
               }
             }
           });
           return deletes.forEach(function(gMarker) {
+            gMarker.isDrawn = false;
             return _this.remove(gMarker, true);
           });
         };
@@ -2492,7 +2497,7 @@ Nicholas McCready - https://twitter.com/nmccready
           this.scope.markerModels = new PropMap();
           this.$timeout = $timeout;
           this.$log.info(this);
-          this.doRebuildAll = this.scope.doRebuildAll != null ? this.scope.doRebuildAll : true;
+          this.doRebuildAll = this.scope.doRebuildAll != null ? this.scope.doRebuildAll : false;
           this.setIdKey(scope);
           this.scope.$watch('doRebuildAll', function(newValue, oldValue) {
             if (newValue !== oldValue) {
@@ -2606,8 +2611,10 @@ Nicholas McCready - https://twitter.com/nmccready
                 return _async.each(payload.adds, function(modelToAdd) {
                   return _this.newChildMarker(modelToAdd, scope);
                 }, function() {
-                  _this.gMarkerManager.draw();
-                  return scope.markerModels = _this.scope.markerModels;
+                  if (payload.adds.length > 0 || payload.removals.length > 0) {
+                    _this.gMarkerManager.draw();
+                    return scope.markerModels = _this.scope.markerModels;
+                  }
                 });
               });
             });
@@ -2965,7 +2972,7 @@ Nicholas McCready - https://twitter.com/nmccready
           this.parentScope = void 0;
           this.$timeout(function() {
             _this.watchOurScope(scope);
-            _this.doRebuildAll = _this.scope.doRebuildAll != null ? _this.scope.doRebuildAll : true;
+            _this.doRebuildAll = _this.scope.doRebuildAll != null ? _this.scope.doRebuildAll : false;
             scope.$watch('doRebuildAll', function(newValue, oldValue) {
               if (newValue !== oldValue) {
                 return _this.doRebuildAll = newValue;

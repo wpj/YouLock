@@ -1,12 +1,23 @@
 angular.module('services', [])
 
-.factory('Data', ['$http', function($http) {
-  var Data = {
+.factory('Record', ['$http', function($http) {
+  var Record = {
     getAll: function(cb, errCb) {
-      $http.get('/api/analytics').success(function(records) {
+      $http.get('/api/data').success(function(records) {
         cb(records);
       }).error(function(err) {
         errCb(err);
+      });
+    },
+    findInMapArea: function(SWLng, SWLat, NELng, NELat) {
+      return $http.get('http://localhost:8080/api/data', {
+        params: {
+          filtered: true,
+          SWLng: SWLng,
+          SWLat: SWLat,
+          NELng: NELng,
+          NELat: NELat
+        }
       });
     },
     getPageviews: function() {
@@ -19,5 +30,5 @@ angular.module('services', [])
 
     }
   };
-  return Data;
+  return Record;
 }]);
