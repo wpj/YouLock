@@ -62,7 +62,8 @@ angular.module('controllers', [])
   };
 
   $scope.refreshMap = function() {
-    searchInMapBounds($scope.map.control.getGMap());
+    // searchInMapBounds($scope.map.control.getGMap());
+    $scope.map.control.refresh();
   };
 
   $scope.setPageviewMode = function() {
