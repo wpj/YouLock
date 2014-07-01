@@ -20,24 +20,32 @@ angular.module('controllers', [])
     showBicycling: false,
     showHeat: true,
     heatLayerCallback: function(layer) {
-      Record.getAll(function(records) {
-        moddedRecords = _.map(records, function(record) {
-          return new google.maps.LatLng(record.location.coordinates[1], record.location.coordinates[0]);
-        });
-        var heatArray = new google.maps.MVCArray(moddedRecords);
-        layer.setData(heatArray);
-      }, function(err) {
-        console.log(err);
-      });
+      $scope.heatLayer = layer;
     },
     events: {
       idle: function(map, event, eventArgs) {
-        searchInMapBounds(map);
+        setHeat();
       }
     }
   };
 
-  var searchInMapBounds = function(map) {
+  var setHeat = function() {
+    searchInMapBoundsWithCallback($scope.map.control.getGMap(), function(records) {
+      scopeRecords = records;
+      console.log("Number of records sent from server", scopeRecords.length);
+      console.log("Data sent from server: ", scopeRecords);
+
+      moddedRecords = _.map(records, function(record) {
+        return new google.maps.LatLng(record.location.coordinates[1], record.location.coordinates[0]);
+      });
+      var heat = new google.maps.MVCArray(moddedRecords);
+      $scope.heatLayer.setData(heat);
+      console.log("Heat layer: ", $scope.heatLayer);
+      console.log("Heat layer data length: ", $scope.heatLayer.data.length);
+    });
+  };
+
+  var searchInMapBoundsWithCallback = function(map, callback) {
 
     var currentMapArea = map.getBounds();
 
@@ -51,31 +59,26 @@ angular.module('controllers', [])
 
     Record.findDataTypeInMapArea(SWLng, SWLat, NELng, NELat, $scope.searchMode)
       .success(function(data) {
-
-        $scope.records = data;
-        console.log("Number of records sent from server", $scope.records.length);
-        console.log("Data sent from server: ", $scope.records);
+        callback(data);
       })
       .error(function(err, status) {
         console.log(err, status);
       });
   };
 
-  $scope.refreshMap = function() {
-    // searchInMapBounds($scope.map.control.getGMap());
-    $scope.map.control.refresh();
-  };
-
   $scope.setPageviewMode = function() {
     $scope.searchMode = 1;
+    setHeat();
   };
 
   $scope.setGPSMode = function() {
     $scope.searchMode = 2;
+    setHeat();
   };
 
   $scope.setAddressMode = function() {
     $scope.searchMode = 3;
+    setHeat();
   };
 
 }]);
