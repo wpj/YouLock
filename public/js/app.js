@@ -1,1 +1,1 @@
-angular.module('dataPortal', ['google-maps', 'controllers', 'directives', 'services']);
+angular.module('dataPortal', ['google-maps', 'controllers', 'directives', 'services', 'ngAutocomplete']);

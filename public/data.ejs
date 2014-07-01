@@ -4,9 +4,11 @@
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, height=device-height">
 
     <link rel="stylesheet" href="css/application.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
 
     <!-- google maps API -->
-    <script src="http://maps.googleapis.com/maps/api/js?libraries=weather,geometry,visualization&sensor=false&language=en&v=3.14"></script>
+    <script src="http://maps.googleapis.com/maps/api/js?libraries=weather,geometry,visualization,places&sensor=false&language=en&v=3.14"></script>
 
     <!-- angular -->
     <script src="lib/angular/angular.js"></script>
@@ -14,6 +16,7 @@
     <!-- vendor -->
     <script src="lib/lodash/dist/lodash.js"></script>
     <script src="lib/angular-google-maps/dist/angular-google-maps.js"></script>
+    <script src="lib/ngAutocomplete/src/ngAutocomplete.js"></script>
 
     <!-- app js -->
     <script src="js/controllers.js"></script>
@@ -24,16 +27,20 @@
   <body ng-app="dataPortal" ng-controller="PortalCtrl">
     
     <header>
-      <div class="header-unit" id="search"><span>Search</span></div>
+      <div class="header-unit" id="search">
+        <form ng-submit="searchLocation()">
+          <input ng-model="searchText" ng-autocomplete="searchText" type="search" placeholder="Search">
+        </form>
+      </div>
 
       <nav>
-        <div class="header-unit" id="pageviews">
+        <div ng-class="{activeButton: activeButton === 1}" class="header-unit" id="pageviews">
           <button ng-click="setPageviewMode()"><span>Page views</span></button>
         </div>
-        <div class="header-unit" id="gps">
+        <div ng-class="{activeButton: activeButton === 2}" class="header-unit" id="gps">
           <button ng-click="setGPSMode()"><span>GPS</span></button>
         </div>
-        <div class="header-unit" id="address">
+        <div ng-class="{activeButton: activeButton === 3}" class="header-unit" id="address">
           <button ng-click="setAddressMode()"><span>Address</span></button>
         </div>
       </nav>

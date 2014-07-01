@@ -44,4 +44,22 @@ angular.module('services', [])
     }
   };
   return Record;
+}])
+
+.factory('Location', ['$q', function($q) {
+  var Location = {
+    geocode: function(address) {
+      var geocoder = new google.maps.Geocoder();
+      var deferred = $q.defer();
+      geocoder.geocode({ address: address }, function(results, status) {
+        if (status === "OK") {
+          return deferred.resolve(results);
+        } else {
+          return deferred.reject();
+        }
+      });
+      return deferred.promise;
+    }
+  };
+  return Location;
 }]);
