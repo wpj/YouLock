@@ -626,6 +626,7 @@ header {
   #search:last-child {
     width: 38.29445%; }
   #search input {
+    font-weight: lighter;
     margin-top: 0.22em;
     margin-left: 0.15em;
     height: 2em;
@@ -650,9 +651,9 @@ header {
     background-color: #992d22; }
 
 .activeButton {
-  border-right: 0.3em solid white; }
+  border-right: 0.25em solid #ecf0f1; }
   .activeButton span {
-    color: white; }
+    color: #ecf0f1; }
 
 .pac-container {
   width: 60% !important;

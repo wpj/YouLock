@@ -11,6 +11,7 @@ angular.module('controllers', [])
       longitude: -73.979316
     },
     control: {},
+    pan: true,
     zoom: 14,
     options: {
       // minZoom: 14
