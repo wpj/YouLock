@@ -18,6 +18,7 @@ var env          = process.env.NODE_ENV || 'development';
 var router       = express.Router();
 var authRouter   = express.Router();
 var dataRouter   = express.Router();
+var adminRouter  = express.Router();
 
 
 // mongoose config
@@ -57,12 +58,14 @@ authRouter.use(passport.session());
 require('./app/routes.js')(router);
 require('./app/auth-routes.js')(authRouter, passport);
 require('./app/data-routes.js')(dataRouter);
+require('./app/admin-routes.js')(adminRouter);
 
 
 // mount routers
 app.use('/api', router);
 app.use('/auth', authRouter);
 app.use('/data', dataRouter);
+app.use('/admin', adminRouter);
 
 
 // start server
