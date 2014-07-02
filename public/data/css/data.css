@@ -589,7 +589,7 @@ header {
     float: left;
     display: block;
     margin-right: 2.84259%;
-    width: 58.86297%;
+    width: 48.57871%;
     height: 100%; }
     header nav:last-child {
       margin-right: 0; }
@@ -620,12 +620,12 @@ header {
 #search {
   float: left;
   display: block;
-  width: 41.13703%;
+  width: 51.42129%;
   background-color: #2c3e50;
   color: black;
   position: relative; }
   #search:last-child {
-    width: 38.29445%; }
+    width: 48.57871%; }
   #search input {
     font-weight: lighter;
     margin-top: 0.22em;
