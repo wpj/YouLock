@@ -3,7 +3,7 @@ var Report = require('./models/report');
 
 module.exports = function(router) {
   router.get('/', function(req, res) {
-    res.render(__dirname + '/../admin/admin');
+    res.render(__dirname + '/../public/admin/admin');
   });
 
   router.get('/reports', function(req, res) {

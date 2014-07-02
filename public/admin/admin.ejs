@@ -2,27 +2,43 @@
 <html>
   <head>
 
-    <link rel="stylesheet" href="./css/admin.css">
+    <link rel="stylesheet" href="css/admin.css">
 
     <!-- angular -->
-    <script src="../public/lib/angular/angular.js"></script>
+    <script src="../lib/angular/angular.js"></script>
 
     <!-- vendor -->
-    <script src="../public/lib/lodash/dist/lodash.js"></script>
+    <script src="../lib/lodash/dist/lodash.js"></script>
 
     <!-- app js -->
+    <script src="js/app.js"></script>
     <script src="js/controllers.js"></script>
     <script src="js/directives.js"></script>
     <script src="js/services.js"></script>
-    <script src="js/app.js"></script>
   </head>
   <body ng-app="adminPortal" ng-controller="AdminCtrl">
     
-    <header>
-      
-    </header>
+    <div id="main">
+      <header>
+        <h1>Reports</h1>
+      </header>
 
-   
+      <ul ng-init="getReports()">
+        <li ng-repeat="report in reports" ng-class-odd="'odd'" ng-class-even="'even'">
+          <div class="report-info">
+            <span># {{$index + 1}}</span>
+            {{report.lockupId}}
+            <p><strong>Description:</strong> {{report.reportDescription}}</p>
+            <time><strong>Date created: </strong>{{report.dateCreated}}</time>
+          </div>
+          
+          <div class="button-gutter">
+            <button ng-click="deleteReport($index)">Delete report</button>
+            <button ng-click="deleteLockup($index)" class="delete">Delete lockup</button>
+          </div>
+        </li>
+      </ul>
+    </div>
 
   </body>
 </html>

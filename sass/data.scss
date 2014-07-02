@@ -2,11 +2,11 @@
 
 // vendor
 @import "../public/lib/normalize.css/normalize";
-@import "bourbon/bourbon";
-@import "base/base";
-@import "neat/neat";
+@import "data/bourbon/bourbon";
+@import "data/base/base";
+@import "data/neat/neat";
 
 // custom
-@import "partials/map-style";
-@import "partials/header";
-@import "partials/places-autocomplete";
+@import "data/partials/map-style";
+@import "data/partials/header";
+@import "data/partials/places-autocomplete";

@@ -2,7 +2,7 @@ var should = require('should'),
     assert = require('assert'),
     request = require('supertest'),
     expect = require('expect.js'),
-    mongoose = require('mongoose')
+    mongoose = require('mongoose'),
     Lockup = require('../app/models/lockup');
 
     var db = mongoose.connect('mongodb://localhost:lockup-api');
@@ -15,7 +15,7 @@ describe('Lockup REST API', function(){
 
     afterEach(function(done) {
       for (var i in mongoose.connection.collections) {
-        mongoose.connection.collections[i].remove(function(){})
+        mongoose.connection.collections[i].remove(function(){});
       }
      done();
     });

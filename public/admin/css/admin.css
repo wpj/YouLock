@@ -564,4 +564,21 @@ input[type="submit"] {
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
+.even {
+  background-color: #bdc3c7; }
+
+.odd {
+  background-color: #95a5a6; }
+
+button.delete {
+  background-color: #c0392b; }
+
+.report-info {
+  display: table-cell;
+  width: 66.66667%; }
+
+.button-gutter {
+  display: table-cell;
+  width: 33.33333%; }
+
 /*# sourceMappingURL=admin.css.map */

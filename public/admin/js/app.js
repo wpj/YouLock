@@ -1,0 +1,1 @@
+angular.module('adminPortal', ['adminPortal.controllers', 'adminPortal.directives', 'adminPortal.services']);

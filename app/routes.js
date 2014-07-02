@@ -70,7 +70,11 @@ module.exports = function(router) {
     .get(function(req, res) {
       Lockup.findById(req.params.lockup_id, function(err, lockup) {
         if (err) res.send(err);
-        res.json(lockup);
+        if (lockup) {
+          res.json(lockup);
+        } else {
+          res.send("Lockup not found.");
+        }
       });
     })
 
@@ -137,6 +141,22 @@ module.exports = function(router) {
         res.json(reports);
       });
     });
+
+  router.delete('/reports/:report_id', function(req, res) {
+    Report.findById(req.params.report_id, function(err, report) {
+      if (report) {
+        Report.remove({
+          // _id: req.params.lockup_id
+          _id: report._id
+        }, function(err, report) {
+          if (err) res.send(err);
+          res.json({ message: 'Report successfully deleted' });
+        });
+      } else {
+        res.json({ message: "Report not found" });
+      }
+    });
+  });
 
   // analytics
   router.get('/analytics/lockups/:lockup_id', function(req, res) {

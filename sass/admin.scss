@@ -2,6 +2,8 @@
 
 // vendor
 @import "../public/lib/normalize.css/normalize";
-@import "bourbon/bourbon";
-@import "base/base";
-@import "neat/neat";
+@import "admin/bourbon/bourbon";
+@import "admin/base/base";
+@import "admin/neat/neat";
+
+@import "admin/partials/data-view";
