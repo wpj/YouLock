@@ -1,6 +1,6 @@
 angular.module('services', [])
 
-.factory('Record', ['$http', 'serverUrl', function($http, serverUrl) {
+.factory('Record', ['$http', 'ServerUrl', function($http, ServerUrl) {
   var Record = {
     getAll: function(cb, errCb) {
       $http.get('/api/data').success(function(records) {
@@ -10,7 +10,7 @@ angular.module('services', [])
       });
     },
     findDataTypeInMapArea: function(SWLng, SWLat, NELng, NELat, searchMode) {
-      return $http.get(serverUrl + 'api/data', {
+      return $http.get(ServerUrl + 'api/data', {
         params: {
           searchMode: searchMode,
           filtered: true,
@@ -23,7 +23,7 @@ angular.module('services', [])
     },
     findAllInMapArea: function(SWLng, SWLat, NELng, NELat) {
       console.log("searching on the server!");
-      return $http.get(serverUrl + 'api/data', {
+      return $http.get(ServerUrl + 'api/data', {
         params: {
           filtered: true,
           SWLng: SWLng,
@@ -32,15 +32,6 @@ angular.module('services', [])
           NELat: NELat
         }
       });
-    },
-    getPageviews: function() {
-
-    },
-    getLocations: function() {
-
-    },
-    getAddresses: function() {
-
     }
   };
   return Record;
@@ -64,4 +55,4 @@ angular.module('services', [])
   return Location;
 }])
 
-.constant('serverUrl', 'http://localhost:8080/');
+.constant('ServerUrl', 'http://localhost:8080/');
