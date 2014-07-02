@@ -573,7 +573,7 @@ body {
   padding: 0; }
 
 .angular-google-map {
-  height: 93%;
+  height: 93.4%;
   width: 100%; }
   .angular-google-map .angular-google-map-container {
     height: 100%;
@@ -582,7 +582,8 @@ body {
       max-width: none; }
 
 header {
-  height: 2.5em;
+  height: 6.6%;
+  min-height: 2.5em;
   width: 100%; }
   header nav {
     float: left;
