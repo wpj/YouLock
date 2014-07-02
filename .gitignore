@@ -17,3 +17,4 @@ test.js
 .idea
 .sass-cache
 public/lib
+*.css.map
