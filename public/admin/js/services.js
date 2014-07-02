@@ -23,6 +23,13 @@ angular.module('adminPortal.services', [])
 
 .factory('Lockup', ['$http', function($http) {
   var Lockup = {
+    findById: function(lockupId, callback, errCb) {
+      $http.get('http://localhost:8080/api/lockups/' + lockupId).success(function(data) {
+        callback(data);
+      }).error(function(err) {
+        errCb(err);
+      });
+    },
     delete: function(lockupId, callback, errCb) {
       $http.delete('http://localhost:8080/api/lockups/' + lockupId).success(function(data) {
         callback(data);

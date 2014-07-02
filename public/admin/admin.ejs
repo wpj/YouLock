@@ -26,10 +26,23 @@
       <ul ng-init="getReports()">
         <li ng-repeat="report in reports" ng-class-odd="'odd'" ng-class-even="'even'">
           <div class="report-info">
-            <span># {{$index + 1}}</span>
-            {{report.lockupId}}
-            <p><strong>Description:</strong> {{report.reportDescription}}</p>
-            <time><strong>Date created: </strong>{{report.dateCreated}}</time>
+            <ul>
+              <li><strong># {{$index + 1}}</strong></li>
+              <li><strong>Description:</strong> {{report.reportDescription}}</li>
+              <li><time><strong>Date created: </strong>{{report.dateCreated}}</time></li>
+            </ul>
+            <button ng-click="toggleLockupInfo($index)">Show Lockup Info</button>
+            
+            <ul ng-show="showInfo($index)">
+              <li>ID: {{activePaneInfo._id}}</li>
+              <li>Address: {{activePaneInfo.address}}</li>
+              <li>Description: {{activePaneInfo.description}}</li>
+              <li># of Lockups: {{activePaneInfo.rackAmount}}</li>
+              <li>Type: {{activePaneInfo.lockupType}}</li>
+              <li>Address: {{activePaneInfo.address}}</li>
+              <li>Pageviews: {{activePaneInfo.pageViews}}</li>
+              <li>Created by: {{activePaneInfo.createdBy}}</li>
+            </ul>
           </div>
           
           <div class="button-gutter">

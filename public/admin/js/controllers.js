@@ -27,4 +27,27 @@ angular.module('adminPortal.controllers', [])
     });
   };
 
+  var getLockupInfo = function(index) {
+    // console.log($scope.reports[index]);
+    Lockup.findById($scope.reports[index].lockupId, function(lockup) {
+      $scope.activePaneInfo = lockup;
+    }, function(err) {
+      console.log(err);
+    });
+  };
+
+  $scope.showInfo = function(index) {
+    return $scope.activePane === index;
+  };
+
+  $scope.toggleLockupInfo = function(index) {
+    $scope.activePane = index;
+
+    getLockupInfo(index);
+  };
+
+  $scope.printJunk = function(index) {
+    return index;
+  };
+
 }]);
