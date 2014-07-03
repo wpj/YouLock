@@ -46,7 +46,7 @@ module.exports = function(passport) {
 
         // check to see if theres already a user with that email
         if (user) {
-          return done(null, false, { 'signupMessage': 'That email is already taken.' });
+          return done(null, false, { 'signupMessage': 'email is already registered' });
         } else {
           var newUser            = new User();
           newUser.local.email    = email;
@@ -76,11 +76,11 @@ module.exports = function(passport) {
       if (err) return done(err);
 
       // if no user is found, return message
-      if (!user) return done(null, false, { 'loginMessage': 'No user found.' });
+      if (!user) return done(null, false, { 'loginMessage': 'email/password is incorrect' });
 
       // if the user is found but the password is wrong
       if (!user.validPassword(password))
-        return done(null, false, { 'loginMessage': 'Oops! Wrong password.' });
+        return done(null, false, { 'loginMessage': 'email/password is incorrect' });
 
       // return the successully logged in user
       return done(null, user, { 'loginMessage': 'Signed in!' });
