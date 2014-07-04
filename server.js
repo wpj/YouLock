@@ -8,7 +8,6 @@ var bodyParser   = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 var cors         = require('cors');
-var morgan       = require('morgan');
 
 var configDb     = require('./config/database.js');
 var db           = mongoose.connection;
@@ -35,6 +34,7 @@ require('./config/passport')(passport);
 
 // dev config
 if (env === 'development') {
+  var morgan = require('morgan');
   app.use(morgan('tiny'));
 }
 
