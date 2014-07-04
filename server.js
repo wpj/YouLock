@@ -33,10 +33,10 @@ require('./config/passport')(passport);
 
 
 // dev config
-if (env === 'development') {
-  var morgan = require('morgan');
-  app.use(morgan('tiny'));
-}
+// if (env === 'development') {
+//   var morgan = require('morgan');
+//   app.use(morgan('tiny'));
+// }
 
 // app config
 app.set('view engine', 'ejs');
