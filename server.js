@@ -60,7 +60,7 @@ adminRouter.use(passport.session());
 
 
 // routes
-require('./app/routes.js')(apiRouter);
+require('./app/api-routes.js')(apiRouter);
 require('./app/auth-routes.js')(authRouter, passport);
 require('./app/data-routes.js')(dataRouter);
 require('./app/admin-routes.js')(adminRouter, passport);
