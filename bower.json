@@ -15,6 +15,7 @@
   "dependencies": {
     "angular": "~1.2.18",
     "angular-google-maps": "~1.1.4",
-    "ngAutocomplete": "~1.0.0"
+    "ngAutocomplete": "~1.0.0",
+    "normalize.css": "~3.0.1"
   }
 }
