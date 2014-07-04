@@ -1,6 +1,3 @@
-// config/passport.js
-
-// load all the things we need
 var LocalStrategy    = require('passport-local').Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
 
@@ -51,6 +48,7 @@ module.exports = function(passport) {
           var newUser            = new User();
           newUser.local.email    = email;
           newUser.local.password = newUser.generateHash(password);
+          newUser.admin          = false;
 
           newUser.save(function(err) {
             if (err) throw err;

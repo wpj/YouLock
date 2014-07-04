@@ -564,21 +564,107 @@ input[type="submit"] {
   -moz-box-sizing: border-box;
   box-sizing: border-box; }
 
+body {
+  background-color: #2c3e50; }
+
+header {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto;
+  color: #ecf0f1; }
+  header:after {
+    content: "";
+    display: table;
+    clear: both; }
+  header h1 {
+    float: left;
+    display: block;
+    margin-right: 2.84259%;
+    width: 79.43148%; }
+    header h1:last-child {
+      margin-right: 0; }
+  header nav {
+    float: left;
+    display: block;
+    margin-right: 2.84259%;
+    width: 17.72593%; }
+    header nav:last-child {
+      margin-right: 0; }
+    header nav .logout {
+      font-weight: bolder;
+      text-align: center;
+      line-height: 2.2em;
+      height: 2.2em;
+      width: 9.45em;
+      margin-top: 0.3em;
+      border-radius: 0.17em;
+      background-color: #1abc9c;
+      color: white; }
+
 .even {
   background-color: #bdc3c7; }
 
 .odd {
   background-color: #95a5a6; }
 
-button.delete {
-  background-color: #c0392b; }
+button.deleteReport {
+  background-color: #d35400; }
+
+button.deleteLockup {
+  background-color: #C0392B; }
+
+button.showInfo {
+  background-color: #2980b9; }
 
 .report-info {
-  display: table-cell;
-  width: 66.66667%; }
+  float: left;
+  display: block;
+  margin-right: 2.84259%;
+  width: 38.29445%; }
+  .report-info:last-child {
+    margin-right: 0; }
 
 .button-gutter {
-  display: table-cell;
-  width: 33.33333%; }
+  float: left;
+  display: block;
+  margin-right: 2.84259%;
+  width: 17.72593%; }
+  .button-gutter:last-child {
+    margin-right: 0; }
+  .button-gutter button {
+    margin-top: 1.2em; }
+
+.list-container {
+  max-width: 68em;
+  margin-left: auto;
+  margin-right: auto; }
+  .list-container:after {
+    content: "";
+    display: table;
+    clear: both; }
+
+div.alert-pill {
+  border: 2px solid #ecf0f1;
+  text-align: center;
+  border-radius: 0.3em;
+  margin-top: 0.2em;
+  margin-left: 0.5em;
+  font-weight: bolder;
+  display: inline-block; }
+
+div.alert-theft {
+  background-color: #8e44ad;
+  color: white; }
+
+div.alert-missing {
+  background-color: #f1c40f;
+  color: black; }
+
+i.fa {
+  margin-right: 0.2em; }
+
+ul.lockupInfo {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em; }
 
 /*# sourceMappingURL=admin.css.map */

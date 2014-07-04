@@ -15,7 +15,7 @@ var db           = mongoose.connection;
 var port         = process.env.PORT || 8080;
 var env          = process.env.NODE_ENV || 'development';
 
-var router       = express.Router();
+var apiRouter    = express.Router();
 var authRouter   = express.Router();
 var dataRouter   = express.Router();
 var adminRouter  = express.Router();
@@ -45,7 +45,7 @@ app.use(cookieParser());
 app.use(bodyParser());
 
 // router config
-router.use(cors());
+apiRouter.use(cors());
 
 // authRouter config
 authRouter.use(cors());
@@ -53,16 +53,21 @@ authRouter.use(session({ secret: "racksRacksRacksRacks" }));
 authRouter.use(passport.initialize());
 authRouter.use(passport.session());
 
+// adminRouter config
+adminRouter.use(session({ secret: "racksRacksRacksRacks" }));
+adminRouter.use(passport.initialize());
+adminRouter.use(passport.session());
+
 
 // routes
-require('./app/routes.js')(router);
+require('./app/routes.js')(apiRouter);
 require('./app/auth-routes.js')(authRouter, passport);
 require('./app/data-routes.js')(dataRouter);
-require('./app/admin-routes.js')(adminRouter);
+require('./app/admin-routes.js')(adminRouter, passport);
 
 
 // mount routers
-app.use('/api', router);
+app.use('/api', apiRouter);
 app.use('/auth', authRouter);
 app.use('/data', dataRouter);
 app.use('/admin', adminRouter);

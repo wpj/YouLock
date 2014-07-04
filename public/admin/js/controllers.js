@@ -1,6 +1,6 @@
 angular.module('adminPortal.controllers', [])
 
-.controller('AdminCtrl', ['$scope', 'Report', 'Lockup', function($scope, Report, Lockup) {
+.controller('AdminCtrl', ['$scope', 'Report', 'Lockup', 'Admin', function($scope, Report, Lockup, Admin) {
 
   $scope.getReports = function() {
     Report.getAll(function(reports) {
@@ -10,44 +10,43 @@ angular.module('adminPortal.controllers', [])
     });
   };
 
-  $scope.deleteReport = function(index) {
-    Report.delete($scope.reports[index]._id, function(data) {
-      $scope.reports.splice(index, 1);
+  $scope.deleteReport = function(report) {
+    Report.delete(report._id, function(data) {
+      $scope.reports.splice($scope.reports.indexOf(report), 1);
       console.log(data);
     }, function(err) {
       console.log(err);
     });
   };
 
-  $scope.deleteLockup = function(index) {
-    Lockup.delete($scope.reports[index].lockupId, function(data) {
+  $scope.deleteLockup = function(report) {
+    Lockup.delete(report.lockupId, function(data) {
       console.log(data);
     }, function(err) {
       console.log(err);
     });
   };
 
-  var getLockupInfo = function(index) {
-    // console.log($scope.reports[index]);
-    Lockup.findById($scope.reports[index].lockupId, function(lockup) {
-      $scope.activePaneInfo = lockup;
+  var getLockupInfo = function(report) {
+    Lockup.findById(report.lockupId, function(lockup) {
+      $scope.activeReportInfo = lockup;
     }, function(err) {
       console.log(err);
     });
   };
 
-  $scope.showInfo = function(index) {
-    return $scope.activePane === index;
+  $scope.showInfo = function(report) {
+    return $scope.activeReport === $scope.reports.indexOf(report);
   };
 
-  $scope.toggleLockupInfo = function(index) {
-    $scope.activePane = index;
+  $scope.toggleLockupInfo = function(report) {
+    $scope.activeReport = $scope.reports.indexOf(report);
 
-    getLockupInfo(index);
+    getLockupInfo(report);
   };
 
-  $scope.printJunk = function(index) {
-    return index;
+  $scope.logout = function() {
+    Admin.logout();
   };
 
 }]);

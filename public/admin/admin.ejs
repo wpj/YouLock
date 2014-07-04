@@ -2,7 +2,10 @@
 <html>
   <head>
 
+    <title>LockTo Admin Portal</title>
+
     <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css">
 
     <!-- angular -->
     <script src="../lib/angular/angular.js"></script>
@@ -21,33 +24,54 @@
     <div id="main">
       <header>
         <h1>Reports</h1>
+        <nav>
+          <a href="logout">
+            <div class="logout">
+              <i class="fa fa-sign-out"></i>
+              Log out
+            </div>
+          </a>
+        </nav>
       </header>
 
       <ul ng-init="getReports()">
-        <li ng-repeat="report in reports" ng-class-odd="'odd'" ng-class-even="'even'">
-          <div class="report-info">
-            <ul>
-              <li><strong># {{$index + 1}}</strong></li>
-              <li><strong>Description:</strong> {{report.reportDescription}}</li>
-              <li><time><strong>Date created: </strong>{{report.dateCreated}}</time></li>
-            </ul>
-            <button ng-click="toggleLockupInfo($index)">Show Lockup Info</button>
+        <li ng-repeat="report in reports | orderBy: '-dateCreated'" ng-class-odd="'odd'" ng-class-even="'even'">
+          <div class="list-container">
+            <div class="report-info">
+              <ul>
+                <li>
+                  <strong># {{$index + 1}}</strong>
+                  <div class="alert-pill alert-missing" ng-show="report.missing"><i class="fa fa-exclamation-triangle"></i>Missing</div>
+                  <div class="alert-pill alert-theft" ng-show="report.theft"><i class="fa fa-exclamation-triangle"></i>Theft</div>
+                </li>
+                <li><strong>Description:</strong> {{report.reportDescription}}</li>
+                <li><strong>Date created: </strong>{{report.dateCreated | date: "medium" }}</li>
+              </ul>
+              
+              <ul class="lockupInfo" ng-show="showInfo(report)">
+                <li><h5>Lockup info</h5></li>
+                <li><strong>ID:</strong> {{activeReportInfo._id}}</li>
+                <li><strong>Address:</strong> {{activeReportInfo.address}}</li>
+                <li><strong>Description:</strong> {{activeReportInfo.description}}</li>
+                <li><strong>Lockup amount:</strong> {{activeReportInfo.rackAmount}}</li>
+                <li><strong>Type:</strong> {{activeReportInfo.lockupType}}</li>
+                <li><strong>Address:</strong> {{activeReportInfo.address}}</li>
+                <li><strong>Pageviews:</strong> {{activeReportInfo.pageViews}}</li>
+                <li><strong>Created by:</strong> {{activeReportInfo.createdBy}}</li>
+              </ul>
+            </div>
+
+            <div class="button-gutter">
+              <button ng-click="toggleLockupInfo(report)" class="showInfo"><i class="fa fa-info-circle"></i>Lockup info</button>
+            </div>
             
-            <ul ng-show="showInfo($index)">
-              <li>ID: {{activePaneInfo._id}}</li>
-              <li>Address: {{activePaneInfo.address}}</li>
-              <li>Description: {{activePaneInfo.description}}</li>
-              <li># of Lockups: {{activePaneInfo.rackAmount}}</li>
-              <li>Type: {{activePaneInfo.lockupType}}</li>
-              <li>Address: {{activePaneInfo.address}}</li>
-              <li>Pageviews: {{activePaneInfo.pageViews}}</li>
-              <li>Created by: {{activePaneInfo.createdBy}}</li>
-            </ul>
-          </div>
-          
-          <div class="button-gutter">
-            <button ng-click="deleteReport($index)">Delete report</button>
-            <button ng-click="deleteLockup($index)" class="delete">Delete lockup</button>
+            <div class="button-gutter">
+              <button ng-click="deleteReport(report)" class="deleteReport"><i class="fa fa-trash-o"></i>Delete report</button>
+            </div>
+
+            <div class="button-gutter">
+              <button ng-click="deleteLockup(report)" class="deleteLockup"><i class="fa fa-trash-o"></i>Delete lockup</button>
+            </div>
           </div>
         </li>
       </ul>

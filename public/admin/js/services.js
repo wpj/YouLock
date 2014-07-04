@@ -3,14 +3,14 @@ angular.module('adminPortal.services', [])
 .factory('Report', ['$http', 'ServerUrl', function($http, ServerUrl) {
   var Report = {
     getAll: function(callback, errCb) {
-      $http.get(ServerUrl + 'api/reports').success(function(reports) {
+      $http.get(ServerUrl + 'admin/reports').success(function(reports) {
         callback(reports);
       }).error(function(err) {
         errCb(err);
       });
     },
     delete: function(reportId, callback, errCb) {
-      $http.delete(ServerUrl + 'api/reports/' + reportId).success(function(data) {
+      $http.delete(ServerUrl + 'admin/reports/' + reportId).success(function(data) {
         callback(data);
       }).error(function(err) {
         errCb(err);
@@ -40,6 +40,19 @@ angular.module('adminPortal.services', [])
   };
 
   return Lockup;
+}])
+
+.factory('Admin', ['$http', 'ServerUrl', function($http, ServerUrl) {
+  var Admin = {
+    logout: function() {
+      $http.get(ServerUrl + 'admin/logout').success(function(data) {
+        console.log(data);
+      }).error(function(err) {
+        console.log(err);
+      });
+    }
+  };
+  return Admin;
 }])
 
 .constant('ServerUrl', 'http://localhost:8080/');

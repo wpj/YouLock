@@ -133,30 +133,7 @@ module.exports = function(router) {
         if (report) console.log(report);
         res.json(report);
       });
-    })
-
-    .get(function(req, res) {
-      Report.find(function(err, reports) {
-        if (err) res.send(err);
-        res.json(reports);
-      });
     });
-
-  router.delete('/reports/:report_id', function(req, res) {
-    Report.findById(req.params.report_id, function(err, report) {
-      if (report) {
-        Report.remove({
-          // _id: req.params.lockup_id
-          _id: report._id
-        }, function(err, report) {
-          if (err) res.send(err);
-          res.json({ message: 'Report successfully deleted' });
-        });
-      } else {
-        res.json({ message: "Report not found" });
-      }
-    });
-  });
 
   // analytics
   router.get('/analytics/lockups/:lockup_id', function(req, res) {
@@ -271,4 +248,13 @@ var isLoggedIn = function(req, res, next) {
 
   res.send(401);
   // res.json(401, { message: "Please sign in." });
+};
+
+var isAdmin = function(req, res, next) {
+  if (req.user.admin) {
+    console.log("User is admin.");
+    return next();
+  }
+
+  res.redirect('/login');
 };
