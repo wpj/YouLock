@@ -3,6 +3,7 @@ var express      = require('express');
 var app          = express();
 var mongoose     = require('mongoose');
 var passport     = require('passport');
+var path         = require('path');
 
 var bodyParser   = require('body-parser');
 var cookieParser = require('cookie-parser');
@@ -40,7 +41,7 @@ require('./config/passport')(passport);
 
 // app config
 app.set('view engine', 'ejs');
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(cookieParser());
 app.use(bodyParser());
 
