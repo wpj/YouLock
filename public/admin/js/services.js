@@ -55,4 +55,4 @@ angular.module('adminPortal.services', [])
   return Admin;
 }])
 
-.constant('ServerUrl', 'http://localhost:8080/');
+.constant('ServerUrl', 'http://youlock.herokuapp.com/');
