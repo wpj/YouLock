@@ -11,7 +11,6 @@ coverage/
 benchmarks/graphs
 testing
 node_modules/
-bower_components
 testing
 test.js
 .idea
