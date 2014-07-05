@@ -1,4 +1,4 @@
-//  setup
+// base setup
 var express      = require('express');
 var app          = express();
 var mongoose     = require('mongoose');
@@ -42,6 +42,7 @@ require('./config/passport')(passport);
 // app config
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/lib', express.static(path.join(__dirname, 'bower_components')));
 app.use(cookieParser());
 app.use(bodyParser());
 
