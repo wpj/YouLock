@@ -43,6 +43,7 @@ require('./config/passport')(passport);
 app.set('view engine', 'ejs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/lib', express.static(path.join(__dirname, 'bower_components')));
+app.use(express.static(path.join(__dirname, 'front-end')));
 app.use(cookieParser());
 app.use(bodyParser());
 
@@ -62,6 +63,9 @@ adminRouter.use(passport.session());
 
 
 // routes
+app.get('/', function(req, res) {
+  res.render(__dirname + '/front-end/index.html');
+});
 require('./app/api-routes.js')(apiRouter);
 require('./app/auth-routes.js')(authRouter, passport);
 require('./app/data-routes.js')(dataRouter);
