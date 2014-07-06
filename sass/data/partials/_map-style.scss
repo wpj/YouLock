@@ -10,6 +10,9 @@ body {
 
 .angular-google-map {
   height: 93.4%;
+  @media (max-width: 600px) {
+    height: 86.8%;
+  }
   width: 100%;
 
   .angular-google-map-container {

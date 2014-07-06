@@ -575,6 +575,9 @@ body {
 .angular-google-map {
   height: 93.4%;
   width: 100%; }
+  @media (max-width: 600px) {
+    .angular-google-map {
+      height: 86.8%; } }
   .angular-google-map .angular-google-map-container {
     height: 100%;
     width: 100%; }
@@ -593,10 +596,17 @@ header {
     height: 100%; }
     header nav:last-child {
       margin-right: 0; }
+    @media (max-width: 600px) {
+      header nav {
+        float: left;
+        display: block;
+        margin-right: 2.84259%;
+        width: 100%; }
+        header nav:last-child {
+          margin-right: 0; } }
   header .header-unit {
     text-align: center;
     height: 100%;
-    width: 33.33333%;
     float: left;
     position: relative; }
     header .header-unit button {
@@ -608,14 +618,39 @@ header {
       font-weight: bold; }
       header .header-unit button:active {
         color: white; }
+      header .header-unit button:disabled {
+        color: black; }
       header .header-unit button:focus {
         outline: none; }
     header .header-unit span {
+      font-size: 1em;
+      word-wrap: break-word;
       font-family: "Oswald", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
       text-transform: uppercase;
       position: absolute;
       bottom: 0.1em;
       left: 0; }
+    header .header-unit span#unfreeze {
+      color: white;
+      bottom: 20px;
+      font-size: 0.5em; }
+      @media (max-width: 950px) {
+        header .header-unit span#unfreeze {
+          bottom: 15px; } }
+      @media (max-width: 800px) {
+        header .header-unit span#unfreeze {
+          position: absolute;
+          top: 0px;
+          right: -15px; } }
+      @media (max-width: 600px) {
+        header .header-unit span#unfreeze {
+          left: 0;
+          top: auto;
+          bottom: 20px;
+          right: auto; } }
+      @media (max-width: 460px) {
+        header .header-unit span#unfreeze {
+          bottom: 15px; } }
 
 #search {
   float: left;
@@ -626,6 +661,14 @@ header {
   position: relative; }
   #search:last-child {
     width: 48.57871%; }
+  @media (max-width: 600px) {
+    #search {
+      float: left;
+      display: block;
+      margin-right: 2.84259%;
+      width: 100%; }
+      #search:last-child {
+        margin-right: 0; } }
   #search input {
     font-weight: lighter;
     margin-top: 0.22em;
@@ -637,19 +680,61 @@ header {
     border: 0px; }
 
 #pageviews {
+  width: 30%;
   background-color: #f39c12; }
   #pageviews button:active {
     background-color: #c27c0e; }
+  #pageviews button:disabled {
+    background-color: #bdc3c7; }
 
 #gps {
+  width: 30%;
   background-color: #d35400; }
   #gps button:active {
     background-color: #a84300; }
+  #gps button:disabled {
+    background-color: #95a5a6; }
 
 #address {
+  width: 30%;
   background-color: #c0392b; }
   #address button:active {
     background-color: #992d22; }
+  #address button:disabled {
+    background-color: #7f8c8d; }
+
+#freezeHeat {
+  width: 10%;
+  background-color: #3498db; }
+  @media (max-width: 950px) {
+    #freezeHeat span {
+      font-size: 0.9em; } }
+  @media (max-width: 800px) {
+    #freezeHeat span {
+      -webkit-transform: rotate(90deg);
+      -moz-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      -o-transform: rotate(90deg);
+      transform: rotate(90deg);
+      position: absolute;
+      top: 0px;
+      left: -23px;
+      font-size: 0.85em; } }
+  @media (max-width: 600px) {
+    #freezeHeat span {
+      font-size: 1em;
+      -webkit-transform: none;
+      -moz-transform: none;
+      -ms-transform: none;
+      -o-transform: none;
+      transform: none;
+      position: absolute;
+      top: auto;
+      bottom: 0.1em;
+      left: 0; } }
+  @media (max-width: 460px) {
+    #freezeHeat span {
+      font-size: 0.85em; } }
 
 .activeButton {
   border-right: 0.25em solid #ecf0f1; }

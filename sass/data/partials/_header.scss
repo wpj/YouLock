@@ -6,13 +6,16 @@ header {
   nav {
     @include span-columns(5 of 10);
     height: 100%;
+    @media (max-width: 600px) {
+      // @include transition (all 0.5s ease-in-out);
+      @include span-columns (10 of 10);
+    }
   }
 
   .header-unit {
     // @include span-columns(2 of 6, block-collapse);
     text-align: center;
     height: 100%;
-    width: percentage(1/3);
     float: left;
     position: relative;
 
@@ -27,23 +30,54 @@ header {
         color: white;
       }
 
+      &:disabled {
+        color: black;
+      }
+
       &:focus {
         outline: none;
       }
     }
 
     span {
+      font-size: 1em;
+      word-wrap: break-word;
       font-family: $sans-serif;
       text-transform: uppercase;
       position: absolute;
       bottom: 0.1em;
       left: 0;
     }
+
+    span#unfreeze {
+      color: white;
+      bottom: 20px;
+      font-size: 0.5em;
+      @media (max-width: 950px) {
+        bottom: 15px;
+      }
+      @media (max-width: 800px) {
+        @include position(absolute, 0px -15px null null);
+      }
+      @media (max-width: 600px) {
+        left: 0;
+        top: auto;
+        bottom: 20px;
+        right: auto;
+      }
+      @media (max-width: 460px) {
+        bottom: 15px;
+      }
+    }
   }
 }
 
 #search {
   @include span-columns(5 of 10, block-collapse);
+  @media (max-width: 600px) {
+    // @include transition (all 0.5s ease-in-out);
+    @include span-columns(10 of 10);
+  }
   background-color: #2c3e50;
   color: black;
   position: relative;
@@ -61,31 +95,73 @@ header {
 }
 
 #pageviews {
+  width: percentage(3/10);
   background-color: #f39c12;
 
   button {
     &:active {
       background-color: shade(#f39c12, 20%);
     }
+
+    &:disabled {
+      background-color: #bdc3c7;
+    }
   }
 }
 
 #gps {
+  width: percentage(3/10);
   background-color: #d35400;
 
   button {
     &:active {
       background-color: shade(#d35400, 20%);
     }
+
+    &:disabled {
+      background-color: #95a5a6;
+    }
   }
 }
 
 #address {
+  width: percentage(3/10);
   background-color: #c0392b;
 
   button {
     &:active {
       background-color: shade(#c0392b, 20%);
+    }
+
+    &:disabled {
+      background-color: #7f8c8d;
+    }
+  }
+}
+
+#freezeHeat {
+  width: percentage(1/10);
+  background-color: #3498db;
+  span {
+    @media (max-width: 950px) {
+      font-size: 0.9em;
+    }
+    @media (max-width: 800px) {
+      @include transform(rotate(90deg));
+      @include position(absolute, 0px null null -23px);
+      font-size: 0.85em;
+    }
+    @media (max-width: 600px) {
+      font-size: 1em;
+      @include transform(none);
+      position: absolute;
+      top: auto;
+      bottom : 0.1em;
+      left: 0;
+    }
+    @media (max-width: 460px) {
+      // color: white;
+      font-size: 0.85em;
     }
   }
 }

@@ -25,7 +25,7 @@ angular.module('controllers', [])
     },
     events: {
       idle: function(map, event, eventArgs) {
-        setHeat();
+        if (!$scope.heatRefreshDisabled) setHeat();
       }
     }
   };
@@ -107,6 +107,16 @@ angular.module('controllers', [])
 
   $scope.searchIsActive = function() {
     return $scope.searchText.length;
+  };
+
+  $scope.heatRefreshDisabled = false;
+
+  $scope.toggleHeat = function() {
+    if ($scope.heatRefreshDisabled === false) {
+      $scope.heatRefreshDisabled = true;
+    } else {
+      $scope.heatRefreshDisabled = false;
+    }
   };
 
 }]);

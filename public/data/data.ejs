@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LockTo Data Portal</title>
+    <title>youLock Data Portal</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, height=device-height">
 
     <link rel="stylesheet" href="css/data.css">
@@ -35,14 +35,20 @@
       </div>
 
       <nav>
+        <div class="header-unit" id="freezeHeat">
+          <button ng-click="toggleHeat()">
+            <span id="unfreeze" ng-show="heatRefreshDisabled">Un-</span>
+            <span>Freeze</span>
+          </button>
+        </div>
         <div ng-class="{activeButton: activeButton === 1}" class="header-unit" id="pageviews">
-          <button ng-click="setPageviewMode()"><span>Page views</span></button>
+          <button ng-disabled="heatRefreshDisabled" ng-click="setPageviewMode()"><span>Page views</span></button>
         </div>
         <div ng-class="{activeButton: activeButton === 2}" class="header-unit" id="gps">
-          <button ng-click="setGPSMode()"><span>GPS</span></button>
+          <button ng-disabled="heatRefreshDisabled" ng-click="setGPSMode()"><span>GPS</span></button>
         </div>
         <div ng-class="{activeButton: activeButton === 3}" class="header-unit" id="address">
-          <button ng-click="setAddressMode()"><span>Address</span></button>
+          <button ng-disabled="heatRefreshDisabled" ng-click="setAddressMode()"><span>Address</span></button>
         </div>
       </nav>
     </header>
