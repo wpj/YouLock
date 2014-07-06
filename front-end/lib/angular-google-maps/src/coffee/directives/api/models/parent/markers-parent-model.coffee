@@ -11,7 +11,7 @@ angular.module("google-maps.directives.api.models.parent")
                 @$timeout = $timeout
                 @$log.info @
                 #assume do rebuild all is false and were lookging for a modelKey prop of id
-                @doRebuildAll = if @scope.doRebuildAll? then @scope.doRebuildAll else true
+                @doRebuildAll = if @scope.doRebuildAll? then @scope.doRebuildAll else false
                 @setIdKey scope
                 @scope.$watch 'doRebuildAll', (newValue, oldValue) =>
                     if (newValue != oldValue)
@@ -108,9 +108,10 @@ angular.module("google-maps.directives.api.models.parent")
                             _async.each payload.adds, (modelToAdd) =>
                                 @newChildMarker(modelToAdd, scope)
                             , () =>
-                                #finally redraw
-                                @gMarkerManager.draw()
-                                scope.markerModels = @scope.markerModels #for other directives like windows
+                                #finally redraw if something has changed
+                                if(payload.adds.length > 0 or payload.removals.length > 0)
+                                  @gMarkerManager.draw()
+                                  scope.markerModels = @scope.markerModels #for other directives like windows
                 else
                     @reBuildMarkers(scope)
 
