@@ -66,11 +66,14 @@ angular.module('controllers', [])
     }, function(err) {
       console.log("Position not found.");
       $ionicLoading.hide();
+      $scope.map.center = { latitude: 40.735666, longitude: -73.990341};
+      $scope.map.zoom = 16;
       showLocationErrorAlert();
     });
   };
 
   showLocationErrorAlert = function() {
+    $ionicLoading.hide();
     var locationErrorPopup = $ionicPopup.alert({
       title: 'Not found!',
       template: "Your location couldn't be found."
