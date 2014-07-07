@@ -35,20 +35,20 @@
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
   </head>
-  <body ng-app="lockupFront" ng-controller="MapCtrl">
+  <body ng-app="lockupFront" ng-controller="MapCtrl" scroll="false">
 
     <form ng-submit="searchLocation()">
       <ion-header-bar class="item-input-inset">
           <label class="item-input-wrapper">
             <i class="icon ion-search placeholder-icon"></i>
             <input ng-autocomplete="searchText" ng-model="searchText" id="searchBar" type="search" placeholder="Search by address" autocapitalize="off" autocorrect="off">
-            <i class="icon ion-close-round" ng-show="searchIsActive()" ng-mousedown="resetSearch()"></i>
+            <i class="icon ion-close-round" ng-show="searchIsActive()" ng-mousedown="resetSearch()" data-tap-disabled="true"></i>
           </label>
           <button type="submit" class="button button-clear" ng-disabled="!searchText.length">Search</button>
       </ion-header-bar>
     </form>
     
-    <ion-content scroll="false" ng-init="getPosition()" data-tap-disabled="true">
+    <ion-content ng-init="getPosition()" data-tap-disabled="true">
 
       <google-map
         center="map.center"
