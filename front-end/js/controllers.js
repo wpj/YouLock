@@ -35,7 +35,7 @@ angular.module('controllers', [])
   // Location processing
 
   var geolocate = function(success, errCb) {
-    $cordovaGeolocation.getCurrentPosition().then(function(position) {
+    $cordovaGeolocation.getCurrentPosition({ maximumAge: 0 }).then(function(position) {
       success(position);
     }, function(err) {
       errCb(err);
