@@ -1,6 +1,6 @@
 angular.module('controllers', [])
 
-.controller('MapCtrl', ['$scope', '$rootScope', '$ionicLoading', '$ionicModal', '$ionicPopup', '$cordovaGeolocation', '$cordovaKeyboard', 'Lockup', 'Report', 'User', 'Analytics', '$log', function($scope, $rootScope, $ionicLoading, $ionicModal, $ionicPopup, $cordovaGeolocation, $cordovaKeyboard, Lockup, Report, User, Analytics, underscore, $log) {
+.controller('MapCtrl', ['$scope', '$rootScope', '$timeout', '$ionicLoading', '$ionicModal', '$ionicPopup', '$cordovaGeolocation', '$cordovaKeyboard', 'Lockup', 'Report', 'User', 'Analytics', '$log', function($scope, $rootScope, $timeout, $ionicLoading, $ionicModal, $ionicPopup, $cordovaGeolocation, $cordovaKeyboard, Lockup, Report, User, Analytics, underscore, $log) {
   
   // $scope initialization
 
@@ -54,6 +54,10 @@ angular.module('controllers', [])
       noBackdrop: true,
       showBackdrop: false
     });
+
+    $timeout(function() {
+      $ionicLoading.hide();
+    }, 1000);
 
     geolocate(function(position) {
       console.log('Got position', position);
@@ -347,6 +351,7 @@ angular.module('controllers', [])
 
   $scope.searchLocation = function() {
     if ($scope.searchText.length) {
+      if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) $cordovaKeyboard.close();
       $ionicLoading.show({
         content: '<i class="icon ion-loading-c"></i>',
         noBackdrop: true,
@@ -356,7 +361,6 @@ angular.module('controllers', [])
       Lockup.geocode($scope.searchText).then(function(data) {
         $ionicLoading.hide();
         $scope.map.center = { latitude: data[0].geometry.location.k, longitude: data[0].geometry.location.A };
-        if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) $cordovaKeyboard.close();
         // send geocoded address to server for analytics
         Analytics.sendAddress(data[0].geometry.location.k, data[0].geometry.location.A);
       }, function(err) {
