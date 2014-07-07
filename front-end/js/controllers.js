@@ -359,7 +359,7 @@ angular.module('controllers', [])
       });
 
       Lockup.geocode($scope.searchText).then(function(data) {
-        if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) $cordovaKeyboard.close();
+        // if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) $cordovaKeyboard.close();
         $ionicLoading.hide();
         $scope.map.center = { latitude: data[0].geometry.location.k, longitude: data[0].geometry.location.A };
         // send geocoded address to server for analytics
