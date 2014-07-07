@@ -10,9 +10,21 @@ module.exports = function(router, passport) {
       
       // add logic for logging in user here
 
-      res.json({
-        signedUp: true,
-        info: info
+      // res.json({
+      //   signedUp: true,
+      //   info: info
+      // });
+
+      req.login(user, function(err) {
+        if (err) return next(err);
+        return res.json({
+          user:  {
+            id: user._id,
+            email: user.local.email
+          },
+          signedIn: true,
+          info: info
+        });
       });
     })(req, res, next);
   });
