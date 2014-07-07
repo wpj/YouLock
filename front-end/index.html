@@ -42,7 +42,7 @@
           <label class="item-input-wrapper">
             <i class="icon ion-search placeholder-icon"></i>
             <input ng-model="searchText" id="searchBar" type="search" placeholder="Search by address" autocapitalize="off" autocorrect="off">
-            <button class="input-button button-icon button-small ion-close-circled" ng-if="searchIsActive()" ng-mousedown="resetSearch()"></button>
+            <button class="input-button button-icon ion-close-circled" ng-if="searchIsActive()" ng-mousedown="resetSearch()"></button>
           </label>
           <button type="submit" class="button button-clear" ng-disabled="!searchText.length">Search</button>
       </ion-header-bar>
