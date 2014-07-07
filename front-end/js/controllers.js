@@ -351,7 +351,7 @@ angular.module('controllers', [])
 
   $scope.searchLocation = function() {
     if ($scope.searchText.length) {
-      if (navigator.userAgent.match(/(iPhone|iPod|iPad|Android|BlackBerry|IEMobile)/)) $cordovaKeyboard.close();
+      $cordovaKeyboard.close();
       $ionicLoading.show({
         content: '<i class="icon ion-loading-c"></i>',
         noBackdrop: true,
