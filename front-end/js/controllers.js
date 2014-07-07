@@ -482,7 +482,7 @@ angular.module('controllers', [])
   };
 
   $scope.register = function() {
-    document.activeElement.blur();
+    document.querySelectorAll('.authInput').blur();
     User.register($scope.registration, function(data) {
       // if (data.user) {
         $scope.loggedIn = true;
@@ -502,7 +502,7 @@ angular.module('controllers', [])
   };
 
   $scope.login = function() {
-    document.activeElement.blur();
+    document.querySelectorAll('.authInput').blur();
     User.login($scope.loginCreds, function(data) {
       $scope.loggedIn = true;
       $scope.currentUser = data.user;
