@@ -251,6 +251,7 @@ angular.module('controllers', [])
   };
 
   $scope.submitLockup = function() {
+    document.activeElement.blur();
     Lockup.submit($scope.lockup, function(data) {
       if (data.name === "ValidationError") {
         $ionicLoading.show({
@@ -352,6 +353,7 @@ angular.module('controllers', [])
   $scope.searchLocation = function() {
     if ($scope.searchText.length) {
       // $cordovaKeyboard.close();
+      document.activeElement.blur();
       $ionicLoading.show({
         content: '<i class="icon ion-loading-c"></i>',
         noBackdrop: true,
