@@ -75,7 +75,7 @@ require('./app/admin-routes.js')(adminRouter, passport);
 // mount routers
 app.use('/api', apiRouter);
 app.use('/auth', authRouter);
-app.use('/data', dataRouter);
+app.use('/portal', dataRouter);
 app.use('/admin', adminRouter);
 
 

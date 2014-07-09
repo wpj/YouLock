@@ -21,4 +21,14 @@ gulp.task('watch-admin', function() {
   gulp.watch('sass/**', ['sass-admin']);
 });
 
+gulp.task('sass-portal', function() {
+  gulp.src('sass/portal.scss')
+    .pipe(sass({ sourcemap: true }))
+    .pipe(gulp.dest('public/portal/css'));
+});
+
+gulp.task('watch-portal', function() {
+  gulp.watch('sass/**', ['sass-portal']);
+});
+
 gulp.task('default', ['sass']);

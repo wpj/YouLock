@@ -1,0 +1,18 @@
+#data {
+  background-color: #f1c40f;
+}
+
+.data-type {
+  color: black;
+  margin-top: 1em;
+  border-radius: 0.5em;
+
+  h3 {
+    margin-top: 0.3em;
+  }
+
+  ul {
+    margin-top: 0.3em;
+    font-family: $serif;
+  }
+}
