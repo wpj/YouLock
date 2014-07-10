@@ -9,6 +9,7 @@ var bodyParser   = require('body-parser');
 var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 var cors         = require('cors');
+var favicon      = require('serve-favicon');
 
 var configDb     = require('./config/database.js');
 var db           = mongoose.connection;
@@ -46,6 +47,7 @@ app.use('/lib', express.static(path.join(__dirname, 'bower_components')));
 app.use(express.static(path.join(__dirname, 'front-end')));
 app.use(cookieParser());
 app.use(bodyParser());
+app.use(favicon(__dirname + '/public/favicon.ico'));
 
 // router config
 apiRouter.use(cors());
