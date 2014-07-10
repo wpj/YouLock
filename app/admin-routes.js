@@ -23,6 +23,51 @@ module.exports = function(router, passport) {
   });
 
   
+  // lockup management routes
+
+  router.route('/lockups/:lockup_id')
+
+    // update the lockup with this id
+    // (accessed at PUT http://localhost:8080/api/lockups/:lockup_id)
+    .put(isLoggedIn, isAdmin, function(req, res) {
+      Lockup.findById(req.params.lockup_id, function(err, lockup) {
+        if (err) return res.send(err);
+        if (lockup) {
+          lockup.update({
+            description: req.body.description,
+            address: req.body.address,
+            location: req.body.location,
+            rackAmount: req.body.rackAmount,
+            createdBy: req.body.createdBy,
+            lockupType: req.body.lockupType
+          }, function(err) {
+            if (err) return res.send(err);
+            res.json({ message: "Lockup updated!" });
+          });
+        } else {
+          res.json({ message: "Lockup not found." });
+        }
+      });
+    })
+
+    // delete the lockup with this id
+    // (accessed at DELETE http://localhost:8080/api/lockups/:lockup_id)
+    .delete(isLoggedIn, isAdmin, function(req, res) {
+      Lockup.findById(req.params.lockup_id, function(err, lockup) {
+        if (lockup) {
+          Lockup.remove({
+            // _id: req.params.lockup_id
+            _id: lockup._id
+          }, function(err, lockup) {
+            if (err) res.send(err);
+            res.json({ message: 'Lockup successfully deleted' });
+          });
+        } else {
+          res.json({ message: "Lockup not found" });
+        }
+      });
+    });
+
   // report routes
 
   router.get('/reports', isLoggedIn, isAdmin, function(req, res) {
@@ -32,7 +77,7 @@ module.exports = function(router, passport) {
     });
   });
 
-  router.delete('/reports/:report_id', function(req, res) {
+  router.delete('/reports/:report_id', isLoggedIn, isAdmin, function(req, res) {
     Report.findById(req.params.report_id, function(err, report) {
       if (report) {
         Report.remove({

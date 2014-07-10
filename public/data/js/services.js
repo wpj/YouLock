@@ -55,5 +55,5 @@ angular.module('services', [])
   return Location;
 }])
 
-.constant('ServerUrl', 'http://youlock.herokuapp.com/');
+.constant('ServerUrl', '/');
 // .constant('ServerUrl', 'http://localhost:8080/');

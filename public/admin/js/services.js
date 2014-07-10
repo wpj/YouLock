@@ -31,7 +31,7 @@ angular.module('adminPortal.services', [])
       });
     },
     delete: function(lockupId, callback, errCb) {
-      $http.delete(ServerUrl + 'api/lockups/' + lockupId).success(function(data) {
+      $http.delete(ServerUrl + 'admin/lockups/' + lockupId).success(function(data) {
         callback(data);
       }).error(function(err) {
         errCb(err);
@@ -55,4 +55,4 @@ angular.module('adminPortal.services', [])
   return Admin;
 }])
 
-.constant('ServerUrl', 'http://youlock.herokuapp.com/');
+.constant('ServerUrl', '/');

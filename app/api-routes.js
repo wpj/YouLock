@@ -63,61 +63,18 @@ module.exports = function(router) {
       }
     });
 
-  router.route('/lockups/:lockup_id')
-
-    // get the lockup with that id (accessed at 
-    // GET http://localhost:8080/api/lockups/:lockup_id)
-    .get(function(req, res) {
-      Lockup.findById(req.params.lockup_id, function(err, lockup) {
-        if (err) res.send(err);
-        if (lockup) {
-          res.json(lockup);
-        } else {
-          res.send("Lockup not found.");
-        }
-      });
-    })
-
-    // update the lockup with this id
-    // (accessed at PUT http://localhost:8080/api/lockups/:lockup_id)
-    .put(function(req, res) {
-      Lockup.findById(req.params.lockup_id, function(err, lockup) {
-        if (err) return res.send(err);
-        if (lockup) {
-          lockup.update({
-            description: req.body.description,
-            address: req.body.address,
-            location: req.body.location,
-            rackAmount: req.body.rackAmount,
-            createdBy: req.body.createdBy,
-            lockupType: req.body.lockupType
-          }, function(err) {
-            if (err) return res.send(err);
-            res.json({ message: "Lockup updated!" });
-          });
-        } else {
-          res.json({ message: "Lockup not found." });
-        }
-      });
-    })
-
-    // delete the lockup with this id
-    // (accessed at DELETE http://localhost:8080/api/lockups/:lockup_id)
-    .delete(function(req, res) {
-      Lockup.findById(req.params.lockup_id, function(err, lockup) {
-        if (lockup) {
-          Lockup.remove({
-            // _id: req.params.lockup_id
-            _id: lockup._id
-          }, function(err, lockup) {
-            if (err) res.send(err);
-            res.json({ message: 'Lockup successfully deleted' });
-          });
-        } else {
-          res.json({ message: "Lockup not found" });
-        }
-      });
+  // get the lockup with that id (accessed at 
+  // GET http://localhost:8080/api/lockups/:lockup_id)
+  router.get('/lockups/:lockup_id', function(req, res) {
+    Lockup.findById(req.params.lockup_id, function(err, lockup) {
+      if (err) res.send(err);
+      if (lockup) {
+        res.json(lockup);
+      } else {
+        res.send("Lockup not found.");
+      }
     });
+  });
 
   // routes for report functionality
   router.route('/reports')
