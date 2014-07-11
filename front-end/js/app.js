@@ -11,7 +11,7 @@ angular.module('lockupFront', ['ionic', 'google-maps', 'controllers', 'directive
           },
           // Error: check the error status to get only the 401
           function(response) {
-            if (response.status === 401) console.log(response);
+            // if (response.status === 401) console.log(response);
             return $q.reject(response);
           }
         );
