@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/portal.css">
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Gentium+Book+Basic' rel='stylesheet' type='text/css'>
   </head>
   <body >
 
@@ -16,18 +17,34 @@
         <h1>youLock Data Portal</h1>
       </header>
 
-      <a href="data">
-        <div id="data" class="data-type">
-          <h3>Data</h3>
-          <h5>View data collected from the youLock app.</h5>
-          <strong>Available data sets: </strong>
-          <ul>
-            <li>Page views on lockups</li>
-            <li>GPS search locations</li>
-            <li>Address search locations</li>
-          </ul>
+      <div id="data" class="data-type">
+        <div class="type-info">
+          <div class="type-heading">
+            <h3><i class="fa fa-fire"></i>Heatmap</h3>
+            <p class="sub-info">View a heat map of data collected from the youLock app.</p>
+          </div>
+          <div class="type-details">
+            <h5>Available data sets: </h5>
+            <ul class="sub-info">
+              <li><i class="fa fa-angle-right"></i> Page views on lockups</li>
+              <li><i class="fa fa-angle-right"></i> GPS search locations</li>
+              <li><i class="fa fa-angle-right"></i> Address search locations</li>
+            </ul>
+          </div>
+          <div class="type-actions">
+            <h5>Actions</h5>
+            <ul class="sub-info">
+              <li><i class="fa fa-angle-right"></i> Set data mode</li>
+              <li><i class="fa fa-angle-right"></i> Freeze data</li>
+            </ul>
+          </div>
         </div>
-      </a>
+        <a href="data">
+          <div class="type-nav">
+            <span>Go to heatmap <i class="fa fa-arrow-circle-right"></i></span>
+          </div>
+        </a>
+      </div>
 
     </div>
 

@@ -1,18 +1,86 @@
 #data {
+}
+
+.type-info {
   background-color: #f1c40f;
+  @include span-columns(6 of 9, block-collapse);
+  height: 8.5em;
+  @include border-left-radius(0.3em);
+
+  @media (max-width: 820px) {
+    @include span-columns(9 of 9);
+    @include border-right-radius(0.3em);
+  }
+  @media (max-width: 520px) {
+    height: 10em;
+  }
+  @media (max-width: 495px) {
+    height: 12em;
+  }
+  @media (max-width: 477px) {
+    height: 14em;
+  }
 }
 
 .data-type {
+  h3 {
+    color: red;
+  }
   color: black;
   margin-top: 1em;
   border-radius: 0.5em;
+  height: 8.5em;
 
-  h3 {
+  .type-heading {
+    @include span-columns(2 of 6);
+    @media (max-width: 820px) {
+      @include span-columns(3 of 9);
+    }
     margin-top: 0.3em;
   }
 
-  ul {
-    margin-top: 0.3em;
-    font-family: $serif;
+  .type-details {
+    margin-top: 0.7em;
+    @include span-columns(2 of 6);
+    @media (max-width: 820px) {
+      @include span-columns(3 of 9);
+    }
+
+    ul {
+      margin-top: 0.3em;
+    }
   }
+
+  .type-actions {
+    margin-top: 0.7em;
+    @include span-columns(2 of 6);
+    @media (max-width: 820px) {
+      @include span-columns(3 of 9);
+    }
+  }
+
+  .type-nav {
+    text-align: center;
+    @include span-columns(3 of 9);
+    @media (max-width: 820px) {
+      @include span-columns(9 of 9);
+      border-radius: 0.3em;
+      border-left: 0px;
+    }
+    background-color: #7f8c8d;
+    border-left: 2px solid #ecf0f1;
+    @include border-right-radius(0.3em);
+    color: black;
+    font-size: 1.5em;
+    height: 100%;
+
+    span {
+      color: white;
+      @include position(relative, 2em null null null);
+    }
+  }
+}
+
+.sub-info {
+  font-family: $serif;
 }
