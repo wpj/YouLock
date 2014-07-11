@@ -22,7 +22,6 @@ angular.module('services', [])
       });
     },
     findAllInMapArea: function(SWLng, SWLat, NELng, NELat) {
-      console.log("searching on the server!");
       return $http.get(ServerUrl + 'api/data', {
         params: {
           filtered: true,

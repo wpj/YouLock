@@ -35,16 +35,12 @@ angular.module('controllers', [])
   var setHeat = function() {
     searchInMapBoundsWithCallback($scope.map.control.getGMap(), function(records) {
       scopeRecords = records;
-      console.log("Number of records sent from server", scopeRecords.length);
-      console.log("Data sent from server: ", scopeRecords);
 
       moddedRecords = _.map(records, function(record) {
         return new google.maps.LatLng(record.location.coordinates[1], record.location.coordinates[0]);
       });
       var heat = new google.maps.MVCArray(moddedRecords);
       $scope.heatLayer.setData(heat);
-      console.log("Heat layer: ", $scope.heatLayer);
-      console.log("Heat layer data length: ", $scope.heatLayer.data.length);
     });
   };
 
