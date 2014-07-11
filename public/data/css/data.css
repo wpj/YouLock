@@ -734,12 +734,51 @@ header {
       left: 0; } }
   @media (max-width: 460px) {
     #freezeHeat span {
-      font-size: 0.85em; } }
+      font-size: 0.75em; } }
 
 .activeButton {
   border-right: 0.25em solid #ecf0f1; }
   .activeButton span {
     color: #ecf0f1; }
+
+.tooltip-item {
+  position: relative; }
+  .tooltip-item:hover .tooltip {
+    opacity: 1;
+    visibility: visible; }
+    @media (max-width: 600px) {
+      .tooltip-item:hover .tooltip {
+        visibility: hidden; } }
+  .tooltip-item .tooltip {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    bottom: 0;
+    left: 50%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: all 0.2s ease-in-out;
+    -moz-transition: all 0.2s ease-in-out;
+    transition: all 0.2s ease-in-out;
+    bottom: 140%;
+    background-color: #ecf0f1;
+    border-radius: 0.1875em;
+    color: #333333;
+    font-size: .9em;
+    line-height: 1.5em;
+    height: 4.5em;
+    margin-left: -8em;
+    opacity: 0;
+    padding: 1em;
+    box-shadow: 0 2px 2px silver;
+    text-align: center;
+    visibility: hidden;
+    min-width: 16em;
+    z-index: 10;
+    font-family: Georgia, Cambria, "Times New Roman", Times, serif; }
+    .tooltip-item .tooltip p {
+      margin-bottom: 0; }
 
 .pac-container {
   width: 60% !important;

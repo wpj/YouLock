@@ -35,11 +35,14 @@
       </div>
 
       <nav>
-        <div class="header-unit" id="freezeHeat">
+        <div class="header-unit tooltip-item" id="freezeHeat">
           <button ng-click="toggleHeat()">
             <span id="unfreeze" ng-show="heatRefreshDisabled">Un-</span>
             <span>Freeze</span>
           </button>
+          <div class="tooltip">
+            <p>Prevent data from refreshing when the map is dragged.</p>
+          </div>
         </div>
         <div ng-class="{activeButton: activeButton === 1}" class="header-unit" id="pageviews">
           <button ng-disabled="heatRefreshDisabled" ng-click="setPageviewMode()"><span>Page views</span></button>
