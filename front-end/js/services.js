@@ -146,3 +146,4 @@ angular.module('services', [])
 
 
 .constant('ServerUrl', '/');
+// .constant('ServerUrl', 'http://localhost:8080/');
