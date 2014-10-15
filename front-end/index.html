@@ -3,7 +3,7 @@
   <head>
     <title>YouLock</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width, height=device-height">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="YouLock">
@@ -11,17 +11,12 @@
 
     <!-- icons -->
 
-    <!-- iOS 7 iPad (retina) -->
-    <link href="img/app-icons/icon-76@2x.png"
-          sizes="152x152"
+    <!-- iPhone 6+ -->
+    <link href="img/app-icons/icon-60@3x.png"
+          sizes="180x180"
           rel="apple-touch-icon">
 
-    <!-- iOS 6 iPad (retina) -->
-    <link href="img/app-icons/icon-72@2x.png"
-          sizes="144x144"
-          rel="apple-touch-icon">
-
-    <!-- iOS 7 iPhone (retina) -->
+    <!-- iPhone 5-6 (retina) -->
     <link href="img/app-icons/icon-60@2x.png"
           sizes="120x120"
           rel="apple-touch-icon">
@@ -31,22 +26,24 @@
           sizes="114x114"
           rel="apple-touch-icon">
 
-    <!-- iOS 7 iPad -->
-    <link href="img/app-icons/icon-76.png"
-          sizes="76x76"
-          rel="apple-touch-icon">
-
-    <!-- iOS 6 iPad -->
-    <link href="img/app-icons/icon-72.png"
-          sizes="72x72"
-          rel="apple-touch-icon">
-
     <!-- iOS 6 iPhone -->
     <link href="img/app-icons/icon-57.png"
           sizes="57x57"
           rel="apple-touch-icon">
     
     <!-- launch images -->
+
+    <!-- iPhone 6+ -->
+    <link href="img/launch/launch-1080x1860.png"
+          media="(device-width: 360px) and (device-height: 640px)
+             and (-webkit-device-pixel-ratio: 3)"
+          rel="apple-touch-startup-image">
+
+    <!-- iPhone 6 -->
+    <link href="img/launch/launch-750x1294.png"
+          media="(device-width: 375px) and (device-height: 667px)
+             and (-webkit-device-pixel-ratio: 2)"
+          rel="apple-touch-startup-image">
 
     <!-- iOS 6 & 7 iPhone 5 -->
     <link href="img/launch/launch-640x1096.png"
@@ -67,7 +64,7 @@
           rel="apple-touch-startup-image">
 
     <link href="lib/ionic/css/ionic.min.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
+    <link href="css/application.css" rel="stylesheet">
 
     <!-- google maps API -->
     <script src='http://maps.googleapis.com/maps/api/js?v=3.16&libraries=places&sensor=true'></script>
@@ -82,10 +79,8 @@
     <script src="lib/ngAutocomplete/src/ngAutocomplete.js"></script>
 
     <!-- your app's js -->
-    <script src="js/controllers.js"></script>
-    <script src="js/directives.js"></script>
-    <script src="js/services.js"></script>
     <script src="js/app.js"></script>
+    <script src="js/templates.js"></script>
 
     <!-- google analytics -->
     <script>
@@ -97,47 +92,48 @@
       ga('create', 'UA-53161440-1', 'auto');
       ga('send', 'pageview');
     </script>
-
   </head>
-  <body ng-app="lockupFront" ng-controller="MapCtrl">
+  <body ng-app="youLock" ng-controller="MapCtrl">
 
-    <form ng-submit="searchLocation()">
-      <ion-header-bar class="item-input-inset">
-          <label class="item-input-wrapper">
-            <i class="icon ion-search placeholder-icon"></i>
-            <input ng-model="searchText" id="searchBar" type="search" placeholder="Search by address" autocapitalize="off" autocorrect="off">
-            <button class="input-button button-icon ion-close-circled" ng-if="searchIsActive()" ng-mousedown="resetSearch()"></button>
-          </label>
-          <button type="submit" class="button button-clear" ng-disabled="!searchText.length">Search</button>
-      </ion-header-bar>
-    </form>
-    
-    <ion-content scroll="false" ng-init="getPosition()" data-tap-disabled="true">
-
-      <google-map
-        center="map.center"
-        zoom="map.zoom"
-        draggable="true"
-        options="map.options"
-        events="map.events"
-        control="map.control"
-        ng-if="map.center"
-        >
-        <markers models="cityRacks" click="openLockupInfoModal" idKey="map.idKey" coords="'location'" doCluster="true" clusterOptions="{maxZoom:16, averageCenter:true, zoomOnClick:false, minimumClusterSize:10}" icon="'icon'"></markers>
-        <markers models="userLockups" click="openLockupInfoModal" idKey="map.idKey" coords="'location'" doCluster="true" clusterOptions="{maxZoom:16, averageCenter:true, zoomOnClick:false, minimumClusterSize:10}" icon="'icon'"></markers>
-        <markers models="sfRacks" click="openLockupInfoModal" idKey="map.idKey" coords="'location'" doCluster="true" clusterOptions="{maxZoom:16, averageCenter:true, zoomOnClick:false, minimumClusterSize:10}" icon="'icon'"></markers>
-        <markers models="chiRacks" click="openLockupInfoModal" idKey="map.idKey" coords="'location'" doCluster="true" clusterOptions="{maxZoom:16, averageCenter:true, zoomOnClick:false, minimumClusterSize:10}" icon="'icon'"></markers>
-        <markers models="dcRacks" click="openLockupInfoModal" idKey="map.idKey" coords="'location'" doCluster="true" clusterOptions="{maxZoom:16, averageCenter:true, zoomOnClick:false, minimumClusterSize:10}" icon="'icon'"></markers>
-      </google-map>
-
-    </ion-content>
-    
-    <ion-footer-bar class="bar-positive">
-      <div class="button-bar">
-        <button ng-click="showAuthModal()" class="button button-icon icon ion-grid"></button>
-        <button ng-click="getPosition()" class="button button-icon icon ion-navigate"></button>
-      </div>
-    </ion-footer-bar>
+    <ion-pane>
+      <form ng-submit="searchLocation()" blur-inputs>
+        <ion-header-bar class="item-input-inset">
+            <label class="item-input-wrapper">
+              <i class="icon ion-search placeholder-icon"></i>
+              <input ng-model="searchText" id="searchBar" type="search" placeholder="Search by address" autocapitalize="off" autocorrect="off">
+              <button class="input-button button-icon ion-close-circled" ng-if="searchIsActive()" ng-mousedown="resetSearch()"></button>
+            </label>
+            <button type="submit" class="button button-clear" ng-disabled="!searchText.length">Search</button>
+        </ion-header-bar>
+      </form>
+      
+      <ion-content scroll="false" data-tap-disabled="true">
+      
+        <google-map
+          center="map.center"
+          zoom="map.zoom"
+          draggable="true"
+          options="map.options"
+          events="map.events"
+          control="map.control"
+          ng-if="map.center"
+          >
+          <markers models="data.cityRacks" click="openLockupInfoModal" idKey="map.idKey" coords="'location'" doCluster="true" clusterOptions="{maxZoom:16, averageCenter:true, zoomOnClick:false, minimumClusterSize:10}" icon="'icon'"></markers>
+          <markers models="data.userLockups" click="openLockupInfoModal" idKey="map.idKey" coords="'location'" doCluster="true" clusterOptions="{maxZoom:16, averageCenter:true, zoomOnClick:false, minimumClusterSize:10}" icon="'icon'"></markers>
+          <markers models="data.sfRacks" click="openLockupInfoModal" idKey="map.idKey" coords="'location'" doCluster="true" clusterOptions="{maxZoom:16, averageCenter:true, zoomOnClick:false, minimumClusterSize:10}" icon="'icon'"></markers>
+          <markers models="data.chiRacks" click="openLockupInfoModal" idKey="map.idKey" coords="'location'" doCluster="true" clusterOptions="{maxZoom:16, averageCenter:true, zoomOnClick:false, minimumClusterSize:10}" icon="'icon'"></markers>
+          <markers models="data.dcRacks" click="openLockupInfoModal" idKey="map.idKey" coords="'location'" doCluster="true" clusterOptions="{maxZoom:16, averageCenter:true, zoomOnClick:false, minimumClusterSize:10}" icon="'icon'"></markers>
+        </google-map>
+      
+      </ion-content>
+      
+      <ion-footer-bar class="bar-positive">
+        <div class="button-bar">
+          <button ng-click="openDashboard()" class="button button-icon icon ion-grid"></button>
+          <button ng-click="getPosition()" class="button button-icon icon ion-navigate"></button>
+        </div>
+      </ion-footer-bar>
+    </ion-pane>
     
   </body>
 </html>
