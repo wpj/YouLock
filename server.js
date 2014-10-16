@@ -10,6 +10,7 @@ var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 var cors         = require('cors');
 var favicon      = require('serve-favicon');
+var compression  = require('compression');
 
 var configDb     = require('./config/database.js');
 var db           = mongoose.connection;
@@ -42,6 +43,7 @@ require('./config/passport')(passport);
 
 // app config
 app.set('view engine', 'ejs');
+app.use(compression());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/lib', express.static(path.join(__dirname, 'bower_components')));
 app.use(express.static(path.join(__dirname, 'front-end')));
