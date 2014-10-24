@@ -32,8 +32,12 @@
   height: 8.5em;
 
   .type-heading {
+    padding-left: 0.75em;
     @include span-columns(2 of 6);
     @media (max-width: 820px) {
+      h3 {
+        font-size: 1.5em;
+      }
       @include span-columns(3 of 9);
     }
     margin-top: 0.3em;
