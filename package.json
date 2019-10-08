@@ -13,7 +13,7 @@
     "express-session": "^1.5.1",
     "gulp": "^3.8.5",
     "gulp-ruby-sass": "^0.5.0",
-    "lodash": "^2.4.1",
+    "lodash": "^4.17.15",
     "mongoose": "~3.8.12",
     "passport": "^0.2.0",
     "passport-facebook": "^1.0.3",
