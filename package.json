@@ -14,7 +14,7 @@
     "gulp": "^3.8.5",
     "gulp-ruby-sass": "^0.5.0",
     "lodash": "^2.4.1",
-    "mongoose": "~3.8.12",
+    "mongoose": "~5.7.6",
     "passport": "^0.2.0",
     "passport-facebook": "^1.0.3",
     "passport-local": "^1.0.0",
